@@ -26,7 +26,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 //resolving the CakeService dependency here
 builder.Services.AddTransient<ICakeService, CakeService>();
-//resolving the ProductService dependency here
+//resolving the UserService dependency here
+builder.Services.AddTransient<IUserService, UserService>();
 //builder.Services.AddTransient<IProductService, ProductService>();
 var app = builder.Build();
 

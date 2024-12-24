@@ -12,7 +12,7 @@ namespace Cakee.Models
         public string UserName { get; set; }
         [Required]
         [StringLength(100)]
-        public string Password { get; set; }
+        public string PassWord { get; set; }
         [Required]
         [StringLength(50)]
         public string FullName { get; set; }
