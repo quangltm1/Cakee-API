@@ -1,0 +1,6 @@
+@Cakee_HostAddress = http://localhost:5043
+
+GET {{Cakee_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
