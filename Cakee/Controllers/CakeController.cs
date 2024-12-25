@@ -33,12 +33,13 @@ namespace Cakee.Controllers
                 {
                     Id = cake.Id.ToString(),
                     CakeName = cake.CakeName,
-                    CakeDescription = cake.CakeDescription,
+                    CakeDescription = cake.CakeSize,
                     CakePrice = cake.CakePrice,
                     CakeDiscount = cake.CakeDiscount,
                     CakeImage = cake.CakeImage,
                     CakeCategoryId = cake.CakeCategoryId,
-                    CakeRating = cake.CakeRating
+                    CakeRating = cake.CakeRating,
+                    CakeQuantity = cake.CakeQuantity
                 });
             }
             return Ok(response);
@@ -57,12 +58,13 @@ namespace Cakee.Controllers
             {
                 //Id = cake.Id.ToString(),  // Convert ObjectId to string
                 CakeName = cake.CakeName,
-                CakeDescription = cake.CakeDescription,
+                CakeSize = cake.CakeSize,
                 CakePrice = cake.CakePrice,
                 CakeDiscount = cake.CakeDiscount,
                 CakeImage = cake.CakeImage,
                 CakeCategory = cake.CakeCategoryId,
-                CakeRating = cake.CakeRating
+                CakeRating = cake.CakeRating,
+                CakeQuantity = cake.CakeQuantity
             };
             return Ok(response); // Return the found cake
         }

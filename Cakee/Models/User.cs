@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cakee.Models
@@ -6,21 +7,17 @@ namespace Cakee.Models
     public class User
     {
         [BsonId]
-        public Object Id { get; set; }
-        [Required]
-        [StringLength(50)]
+        public ObjectId Id { get; set; }
+        [BsonRequired]
         public string UserName { get; set; }
-        [Required]
-        [StringLength(100)]
+        [BsonRequired]
         public string PassWord { get; set; }
-        [Required]
-        [StringLength(50)]
+        [BsonRequired]
         public string FullName { get; set; }
-        [Required]
-        [StringLength(11)]
+        [BsonRequired]
         public string Phone { get; set; }
-        [Required]
-        [StringLength(1)]
+
+        [BsonRequired]
         public int Role { get; set; }
     }
 }
