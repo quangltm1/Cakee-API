@@ -1,5 +1,6 @@
 ﻿using Cakee.Models;
 using Cakee.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -33,13 +34,14 @@ namespace Cakee.Controllers
                 {
                     Id = cake.Id.ToString(),
                     CakeName = cake.CakeName,
-                    CakeDescription = cake.CakeSize,
+                    CakeSize = cake.CakeSize,
+                    CakeDescription = cake.CakeDescription,
                     CakePrice = cake.CakePrice,
                     CakeDiscount = cake.CakeDiscount,
                     CakeImage = cake.CakeImage,
                     CakeCategoryId = cake.CakeCategoryId,
                     CakeRating = cake.CakeRating,
-                    CakeQuantity = cake.CakeQuantity
+                    CakeQuantity = cake.CakeQuantity,
                 });
             }
             return Ok(response);

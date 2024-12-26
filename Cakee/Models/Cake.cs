@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-
+[BsonIgnoreExtraElements]
 public class Cake
 {
     [BsonId]
@@ -9,7 +9,10 @@ public class Cake
     [BsonRequired]
     [BsonElement("cakeName")]
     public string CakeName { get; set; }  // Correct property name
+    [BsonElement("cakeSize")]
     public int CakeSize { get; set; }
+    [BsonElement("cakeDescription")]
+    public string CakeDescription { get; set; }
     [BsonRequired]
     public decimal CakePrice { get; set; }
     public decimal CakeDiscount { get; set; }
@@ -18,6 +21,6 @@ public class Cake
     public ObjectId CakeCategoryId { get; set; }
     public double CakeRating { get; set; }
     [BsonRequired]
-    public int CakeQuantity { get; set; }
+    public int CakeQuantity { get; set; } = 0;
 
 }
