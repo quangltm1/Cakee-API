@@ -14,9 +14,28 @@ namespace Cakee.Services
         public UserService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
-            _userCollection = database.GetCollection<User>(dbSettings.Value.UsersCollectionName);
+            _users = database.GetCollection<User>(dbSettings.Value.UsersCollectionName);
         }
 
+        public async Task<User> RegisterUserAsync(User user)
+        {
+            var existingUser = await _users.Find(u => u.Username == user.Username || u.Phone == user.Phone).FirstOrDefaultAsync();
+            if (existingUser != null) return null;
+
+            user.PasswordHash = HashPassword(user.PasswordHash);
+            user.CreatedAt = DateTime.UtcNow;
+
+            await _users.InsertOneAsync(user);
+            return user;
+        }
+
+        public async Task<User> AuthenticateAsync(string username, string password)
+        {
+            var user = await _users.Find(u => u.Username == username).FirstOrDefaultAsync();
+            if (user == null || !VerifyPassword(password, user.PasswordHash)) return null;
+
+            return user;
+        }
         public async Task<List<User>> GetAllAsync()
         {
             try
