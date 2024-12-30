@@ -1,125 +1,125 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\quangltm1\\Cakee_Api\\",
+  "WorkspaceRootPath": "D:\\quangltm1\\Cakee-API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\controllers\\cakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\controllers\\cakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\controllers\\cakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\cake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\cake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\cake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\cakeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\cakeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\cakeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\models\\cake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\models\\cake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\models\\cake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\acessory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\acessory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\acessory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\icakeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\icakeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\icakeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\ibillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\ibillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\ibillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\billdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\billdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\billdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\cakesize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\cakesize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\cakesize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\statistical.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\statistical.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\statistical.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\datas\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\datas\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\datas\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\acessoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\acessoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\acessoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\cakesizeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\cakesizeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\cakesizeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\statisticalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\statisticalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\statisticalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\billservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\billservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\billservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\iacessoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\iacessoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\iacessoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\icakesizeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\icakesizeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\icakesizeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\istatisticalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\istatisticalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\istatisticalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\ishoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\ishoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\ishoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee_api\\cakee_api\\services\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|d:\\quangltm1\\cakee-api\\cakee_api\\services\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C5D6FD0-EE30-4721-9ADF-067A268C8B3C}|Cakee_Api\\Cakee_Api.csproj|solutionrelative:cakee_api\\services\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -144,9 +144,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CakeController.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Controllers\\CakeController.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Controllers\\CakeController.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Controllers\\CakeController.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Controllers\\CakeController.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Controllers\\CakeController.cs",
               "RelativeToolTip": "Cakee_Api\\Controllers\\CakeController.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAwwDcAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -157,35 +157,33 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Program.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Program.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Program.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Program.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Program.cs",
               "RelativeToolTip": "Cakee_Api\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T05:43:17.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T05:43:17.296Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "CakeService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\CakeService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\CakeService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\CakeService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\CakeService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\CakeService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\CakeService.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAkwEIAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T05:47:05.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T05:47:05.884Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "BillDetails.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\BillDetails.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\BillDetails.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\BillDetails.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\BillDetails.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\BillDetails.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\BillDetails.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -195,87 +193,81 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\appsettings.json",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\appsettings.json",
               "RelativeDocumentMoniker": "Cakee_Api\\appsettings.json",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\appsettings.json",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\appsettings.json",
               "RelativeToolTip": "Cakee_Api\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-29T05:37:35.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T05:37:35.955Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "IBillService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IBillService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IBillService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\IBillService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IBillService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IBillService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\IBillService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T05:45:53.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T05:45:53.363Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "Acessory.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Acessory.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Acessory.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\Acessory.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Acessory.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Acessory.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\Acessory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T03:32:31.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T03:32:31.492Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Cake.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Cake.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Cake.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\Cake.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Cake.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Cake.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\Cake.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAcwBAAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T03:26:50.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T03:26:50.248Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "Cake.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Models\\Cake.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Models\\Cake.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Models\\Cake.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Models\\Cake.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Models\\Cake.cs",
               "RelativeToolTip": "Cakee_Api\\Models\\Cake.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T03:17:44.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T03:17:44.011Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "ICakeService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ICakeService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ICakeService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\ICakeService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ICakeService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ICakeService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\ICakeService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T05:44:35.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T05:44:35.943Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
               "Title": "Bill.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Bill.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Bill.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\Bill.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Bill.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Bill.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\Bill.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAUwDAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -285,9 +277,9 @@
               "$type": "Document",
               "DocumentIndex": 14,
               "Title": "ShoppingCart.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\ShoppingCart.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\ShoppingCart.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\ShoppingCart.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\ShoppingCart.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\ShoppingCart.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\ShoppingCart.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -297,22 +289,21 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "Category.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Category.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Category.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\Category.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Category.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Category.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T03:30:19.128Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T03:30:19.128Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
               "Title": "User.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\User.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\User.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\User.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\User.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\User.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\User.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAA1wBcAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -322,9 +313,9 @@
               "$type": "Document",
               "DocumentIndex": 15,
               "Title": "Statistical.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Statistical.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Statistical.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\Statistical.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\Statistical.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\Statistical.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\Statistical.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -334,9 +325,9 @@
               "$type": "Document",
               "DocumentIndex": 13,
               "Title": "CakeSize.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\CakeSize.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\CakeSize.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\CakeSize.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\CakeSize.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\CakeSize.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\CakeSize.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -346,9 +337,9 @@
               "$type": "Document",
               "DocumentIndex": 16,
               "Title": "MongoDBSettings.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\MongoDBSettings.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\MongoDBSettings.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Datas\\MongoDBSettings.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Datas\\MongoDBSettings.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Datas\\MongoDBSettings.cs",
               "RelativeToolTip": "Cakee_Api\\Datas\\MongoDBSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -358,9 +349,9 @@
               "$type": "Document",
               "DocumentIndex": 17,
               "Title": "AcessoryService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\AcessoryService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\AcessoryService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\AcessoryService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\AcessoryService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\AcessoryService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\AcessoryService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -370,9 +361,9 @@
               "$type": "Document",
               "DocumentIndex": 18,
               "Title": "CakeSizeService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\CakeSizeService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\CakeSizeService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\CakeSizeService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\CakeSizeService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\CakeSizeService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\CakeSizeService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -382,9 +373,9 @@
               "$type": "Document",
               "DocumentIndex": 19,
               "Title": "StatisticalService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\StatisticalService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\StatisticalService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\StatisticalService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\StatisticalService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\StatisticalService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\StatisticalService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -394,9 +385,9 @@
               "$type": "Document",
               "DocumentIndex": 20,
               "Title": "ShoppingCartService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ShoppingCartService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ShoppingCartService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\ShoppingCartService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ShoppingCartService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ShoppingCartService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\ShoppingCartService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -406,9 +397,9 @@
               "$type": "Document",
               "DocumentIndex": 21,
               "Title": "BillService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\BillService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\BillService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\BillService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\BillService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\BillService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\BillService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -418,9 +409,9 @@
               "$type": "Document",
               "DocumentIndex": 22,
               "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\UserService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\UserService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\UserService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\UserService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\UserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -430,9 +421,9 @@
               "$type": "Document",
               "DocumentIndex": 23,
               "Title": "CategoryService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\CategoryService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\CategoryService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\CategoryService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\CategoryService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\CategoryService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\CategoryService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -442,9 +433,9 @@
               "$type": "Document",
               "DocumentIndex": 24,
               "Title": "IAcessoryService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IAcessoryService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IAcessoryService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\IAcessoryService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IAcessoryService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IAcessoryService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\IAcessoryService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -454,9 +445,9 @@
               "$type": "Document",
               "DocumentIndex": 25,
               "Title": "ICakeSizeService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ICakeSizeService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ICakeSizeService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\ICakeSizeService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ICakeSizeService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ICakeSizeService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\ICakeSizeService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -466,9 +457,9 @@
               "$type": "Document",
               "DocumentIndex": 26,
               "Title": "IStatisticalService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IStatisticalService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IStatisticalService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\IStatisticalService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IStatisticalService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IStatisticalService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\IStatisticalService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -478,9 +469,9 @@
               "$type": "Document",
               "DocumentIndex": 27,
               "Title": "IShoppingCartService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IShoppingCartService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IShoppingCartService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\IShoppingCartService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IShoppingCartService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IShoppingCartService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\IShoppingCartService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -490,9 +481,9 @@
               "$type": "Document",
               "DocumentIndex": 28,
               "Title": "IUserService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IUserService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IUserService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\IUserService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\IUserService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\IUserService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -502,9 +493,9 @@
               "$type": "Document",
               "DocumentIndex": 29,
               "Title": "ICategoryService.cs",
-              "DocumentMoniker": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ICategoryService.cs",
+              "DocumentMoniker": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ICategoryService.cs",
               "RelativeDocumentMoniker": "Cakee_Api\\Services\\ICategoryService.cs",
-              "ToolTip": "D:\\quangltm1\\Cakee_Api\\Cakee_Api\\Services\\ICategoryService.cs",
+              "ToolTip": "D:\\quangltm1\\Cakee-API\\Cakee_Api\\Services\\ICategoryService.cs",
               "RelativeToolTip": "Cakee_Api\\Services\\ICategoryService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
