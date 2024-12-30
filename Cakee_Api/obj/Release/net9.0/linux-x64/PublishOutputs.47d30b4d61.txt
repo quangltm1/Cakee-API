@@ -1,0 +1,9 @@
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Cakee_Api
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\appsettings.Development.json
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\appsettings.json
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Cakee_Api.dll
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Cakee_Api.deps.json
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Cakee_Api.runtimeconfig.json
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Cakee_Api.pdb
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Microsoft.AspNetCore.OpenApi.dll
+D:\quangltm1\Cakee_Api\Cakee_Api\obj\Release\net9.0\linux-x64\PubTmp\Out\Microsoft.OpenApi.dll
