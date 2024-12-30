@@ -19,5 +19,32 @@ namespace Cakee.Models
 
         [BsonRequired]
         public int Role { get; set; }
+        [BsonRequired]
+        [BsonElement("created_at")]
+        public DateTime CreatedAt { get; set; }
+    }
+
+    public class UserRegisterRequest
+    {
+        [Required]
+        [MinLength(3)]
+        public string Username { get; set; }
+
+        [Required]
+        [MinLength(6)]
+        public string Password { get; set; }
+
+        public string FullName { get; set; }
+        [Required]
+        [MinLength(10)]
+        public string Phone { get; set; }
+    }
+
+    public class UserLoginRequest
+    {
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }

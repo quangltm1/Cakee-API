@@ -2,6 +2,7 @@
 using Cakee.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +13,7 @@ namespace Cakee.Controllers
     public class CakeController : ControllerBase
     {
         private readonly ICakeService _cakeService;
+        private readonly ICategoryService _cate;
 
         public CakeController(ICakeService cakeService)
         {
@@ -34,20 +36,29 @@ namespace Cakee.Controllers
                 {
                     Id = cake.Id.ToString(),
                     CakeName = cake.CakeName,
+                    CakeCategoryId = cake.CakeCategoryId.ToString(),
                     CakeSize = cake.CakeSize,
                     CakeDescription = cake.CakeDescription,
                     CakePrice = cake.CakePrice,
-                    CakeDiscount = cake.CakeDiscount,
                     CakeImage = cake.CakeImage,
-                    CakeCategoryId = cake.CakeCategoryId,
                     CakeRating = cake.CakeRating,
                     CakeQuantity = cake.CakeQuantity,
                 });
             }
             return Ok(response);
         }
+        [HttpGet("getCategoryOfCake")]
+        public async Task<IActionResult> GetCategoryOfCake(string cakeId)
+        {
+            var cakes = await _cakeService.GetCategoryByCakeIdAsync(cakeId);
+            var response = new
+            {
+                CategoryName = cakes.CategoryName.ToString(),
+            };
 
-        // GET api/<CakeController>/5
+            return Ok(response);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetCakeById(string id)
         {
@@ -62,14 +73,14 @@ namespace Cakee.Controllers
                 CakeName = cake.CakeName,
                 CakeSize = cake.CakeSize,
                 CakePrice = cake.CakePrice,
-                CakeDiscount = cake.CakeDiscount,
                 CakeImage = cake.CakeImage,
-                CakeCategory = cake.CakeCategoryId,
+                CakeCategory = cake.CakeCategoryId.ToString(), // Changed to CakeCategoryName
                 CakeRating = cake.CakeRating,
                 CakeQuantity = cake.CakeQuantity
             };
             return Ok(response); // Return the found cake
         }
+
 
         // POST api/<CakeController>
         [HttpPost]

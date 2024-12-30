@@ -14,33 +14,27 @@ namespace Cakee.Services
         public UserService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
-            _users = database.GetCollection<User>(dbSettings.Value.UsersCollectionName);
+            _userCollection = database.GetCollection<User>(dbSettings.Value.UsersCollectionName);
         }
 
-        public async Task<User> RegisterUserAsync(User user)
-        {
-            var existingUser = await _users.Find(u => u.Username == user.Username || u.Phone == user.Phone).FirstOrDefaultAsync();
-            if (existingUser != null) return null;
 
-            user.PasswordHash = HashPassword(user.PasswordHash);
-            user.CreatedAt = DateTime.UtcNow;
 
-            await _users.InsertOneAsync(user);
-            return user;
-        }
 
-        public async Task<User> AuthenticateAsync(string username, string password)
-        {
-            var user = await _users.Find(u => u.Username == username).FirstOrDefaultAsync();
-            if (user == null || !VerifyPassword(password, user.PasswordHash)) return null;
-
-            return user;
-        }
         public async Task<List<User>> GetAllAsync()
         {
             try
             {
                 return await _userCollection.Find(_ => true).ToListAsync();
+            }
+            catch (MongoConnectionException ex)
+            {
+                Console.WriteLine($"MongoDB connection error: {ex.Message}");
+                throw new ApplicationException("Unable to connect to the database server. Please try again later.", ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine($"Timeout error: {ex.Message}");
+                throw new ApplicationException("The request timed out. Please try again later.", ex);
             }
             catch (Exception ex)
             {
@@ -48,6 +42,7 @@ namespace Cakee.Services
                 throw new ApplicationException("Unable to fetch users at this time.", ex);
             }
         }
+
 
         public async Task<User> GetByIdAsync(string id)
         {

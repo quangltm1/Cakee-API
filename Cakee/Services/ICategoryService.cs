@@ -1,4 +1,5 @@
 ﻿using Cakee.Models;
+using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,5 +13,6 @@ namespace Cakee.Services
         Task UpdateAsync(string id, Category category);
         Task DeleteAsync(string id);
         Task<Category> GetByNameAsync(string categoryName);
+        Task<string> GetByNameByIdAsync(string id);
     }
 }

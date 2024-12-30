@@ -4,6 +4,7 @@ using Cakee.Services;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Cakee.Controllers
 {
@@ -12,11 +13,14 @@ namespace Cakee.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly CakeService _cakeService;
 
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
+
+
 
         // GET: api/<CategoryController>
         [HttpGet]
@@ -36,6 +40,8 @@ namespace Cakee.Controllers
 
             return Ok(response);
         }
+
+        
 
         // GET api/<CategoryController>/5
         [HttpGet("{id}")]
@@ -99,9 +105,18 @@ namespace Cakee.Controllers
                 }
             });
         }
+        [HttpGet("getCategoryNameById/{id}")]
+        public async Task<IActionResult> GetByNameByIdAsync(string id)
+        {
+            var categoryName = await _categoryService.GetByNameByIdAsync(id); // Get category name by ID
 
+            if (categoryName == null)
+            {
+                return NotFound("Category not found");
+            }
 
-
+            return Ok(new { CategoryName = categoryName }); // Return the category name
+        }
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]

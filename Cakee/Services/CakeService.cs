@@ -1,5 +1,6 @@
 ﻿using Cakee.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Cakee.Services
@@ -7,14 +8,33 @@ namespace Cakee.Services
     public class CakeService : ICakeService
     {
         private readonly IMongoCollection<Cake> _cakeCollection;
+        private readonly IMongoCollection<Category> _categoryCollection;
         private readonly IOptions<DatabaseSettings> _dbSettings;
 
         public CakeService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
             _cakeCollection = database.GetCollection<Cake>(dbSettings.Value.CakesCollectionName);
+            _categoryCollection = database.GetCollection<Category>(dbSettings.Value.CategoriesCollectionName);
 
         }
+
+        public async Task<Category> GetCategoryByCakeIdAsync(string cakeId)
+        {
+            // Find the cake by Id
+            var cake = await _cakeCollection.Find(c => c.Id.ToString() == cakeId).FirstOrDefaultAsync();
+
+            if (cake != null)
+            {
+                // Fetch the category by its Id (stored in CakeCategoryName)
+                var category = await _categoryCollection.Find(c => c.Id == cake.CakeCategoryId).FirstOrDefaultAsync();
+                return category;
+            }
+
+            return null; // Return null if the cake is not found
+        }
+
+
         public async Task<Cake> CreateAsync(Cake cake)
         {
             await _cakeCollection.InsertOneAsync(cake);
@@ -28,7 +48,9 @@ namespace Cakee.Services
 
         public async Task<List<Cake>> GetAllAsync()
         {
-            return await _cakeCollection.Find(cake => true).ToListAsync();
+            var cakes = await _cakeCollection.Find(cake => true).ToListAsync();
+            return cakes;
+
         }
 
         public async Task<Cake> GetByIdAsync(string id)

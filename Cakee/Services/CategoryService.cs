@@ -1,56 +1,64 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Cakee.Models;
+using Cakee.Services;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Cakee.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
-namespace Cakee.Services
+public class CategoryService : ICategoryService
 {
-    public class CategoryService : ICategoryService
+    private readonly IMongoCollection<Category> _categoryCollection;
+    private readonly IMongoCollection<Cake> _cakeCollection;
+    private readonly IOptions<DatabaseSettings> _dbSettings;
+
+    public CategoryService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
     {
-        private readonly IMongoCollection<Category> _categoryCollection;
-        private readonly IOptions<DatabaseSettings> _dbSettings;
+        var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
+        _categoryCollection = database.GetCollection<Category>(dbSettings.Value.CategoriesCollectionName);
+        _cakeCollection = database.GetCollection<Cake>(dbSettings.Value.CakesCollectionName); // Added cake collection if needed
+    }
 
-        public CategoryService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
+    public async Task<Category> CreateAsync(Category category)
+    {
+        await _categoryCollection.InsertOneAsync(category);
+        return category;
+    }
+
+    public async Task<List<Category>> GetAllAsync()
+    {
+        return await _categoryCollection.Find(category => true).ToListAsync();
+    }
+
+    public async Task DeleteAsync(string id)
+    {
+        await _categoryCollection.DeleteOneAsync(category => category.Id.ToString() == id);
+    }
+
+    public async Task<Category> GetByIdAsync(string id)
+    {
+        return await _categoryCollection.Find<Category>(category => category.Id.ToString() == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<string> GetByNameByIdAsync(string id)
+    {
+        // Query the Category collection by the provided id
+        var category = await _categoryCollection.Find<Category>(category => category.Id.ToString() == id).FirstOrDefaultAsync();
+
+        if (category == null)
         {
-            var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
-            _categoryCollection = database.GetCollection<Category>(dbSettings.Value.CategoriesCollectionName);
+            return null; // If no category found, return null or an appropriate value
         }
 
-        public async Task<Category> CreateAsync(Category category)
-        {
-            await _categoryCollection.InsertOneAsync(category);
-            return category;
-        }
+        return category.CategoryName; // Return only the CategoryName
+    }
 
-        public async Task<List<Category>> GetAllAsync()
-        {
-            return await _categoryCollection.Find(category => true).ToListAsync();
-        }
+    public async Task UpdateAsync(string id, Category category)
+    {
+        await _categoryCollection.ReplaceOneAsync(c => c.Id.ToString() == id, category);
+    }
 
-        public async Task DeleteAsync(string id)
-        {
-            await _categoryCollection.DeleteOneAsync(category => category.Id.ToString() == id);
-        }
-
-        public async Task<Category> GetByIdAsync(string id)
-        {
-            return await _categoryCollection.Find<Category>(category => category.Id.ToString() == id).FirstOrDefaultAsync();
-        }
-
-        // Fixed method signature
-        public async Task UpdateAsync(string id, Category category)
-        {
-            await _categoryCollection.ReplaceOneAsync(c => c.Id.ToString() == id, category);
-        }
-
-        // Fixed GetByNameAsync method for MongoDB
-        public async Task<Category> GetByNameAsync(string name)
-        {
-            return await _categoryCollection
-                .Find(category => category.CategoryName == name)
-                .FirstOrDefaultAsync();
-        }
+    public async Task<Category> GetByNameAsync(string name)
+    {
+        return await _categoryCollection
+            .Find(category => category.CategoryName == name)
+            .FirstOrDefaultAsync();
     }
 }

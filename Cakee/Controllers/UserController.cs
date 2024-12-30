@@ -21,7 +21,7 @@ namespace Cakee.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("Get All Account")]
         public async Task<ActionResult> GetUser()
         {
             var users = await _userService.GetAllAsync();
@@ -35,6 +35,7 @@ namespace Cakee.Controllers
             {
                 Id = user.Id.ToString(),
                 userName = user.UserName,
+                pass = user.PassWord,
                 FullName = user.FullName,
                 Phone = user.Phone,
                 Role = user.Role
@@ -43,7 +44,7 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
-        [HttpGet("role/{role}")]
+        [HttpGet("Get Role Of User")]
         public async Task<ActionResult> GetUserByRole(int role)
         {
             var users = await _userService.GetByRoleAsync(role);
@@ -57,20 +58,33 @@ namespace Cakee.Controllers
         }
 
         // CREATE a new user
-        [HttpPost]
+        [HttpPost("Create User")]
         public async Task<ActionResult> CreateUser([FromBody] User user)
         {
             if (user == null)
             {
                 return BadRequest(new { Message = "User data is invalid" });
             }
+            user.Role = 0;
+            var createdUser = await _userService.CreateAsync(user);
+            return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
+        }
 
+        //Create a new admin
+        [HttpPost("Create Admin")]
+        public async Task<ActionResult> CreateAdmin([FromBody] User user)
+        {
+            if (user == null)
+            {
+                return BadRequest(new { Message = "User data is invalid" });
+            }
+            user.Role = 1;
             var createdUser = await _userService.CreateAsync(user);
             return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
         }
 
         // UPDATE an existing user
-        [HttpPut("{id}")]
+        [HttpPut("Update Account")]
         public async Task<ActionResult> UpdateUser(string id, [FromBody] User user)
         {
             if (user == null)
@@ -89,7 +103,7 @@ namespace Cakee.Controllers
         }
 
         // PATCH an existing user (partial update)
-        [HttpPatch("{id}")]
+        [HttpPatch("Update User")]
         public async Task<ActionResult> UpdateUserPartial(string id, [FromBody] UserPatchRequest patchRequest)
         {
             if (patchRequest == null)
@@ -129,7 +143,7 @@ namespace Cakee.Controllers
 
 
         // DELETE an existing user
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete Account")]
         public async Task<ActionResult> DeleteUser(string id)
         {
             var existingUser = await _userService.GetByIdAsync(id);
