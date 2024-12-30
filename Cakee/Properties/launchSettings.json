@@ -8,6 +8,15 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5043"
     },
+    "Cakee": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5000",
+      "dotnetRunMessages": true
+    },
     "https": {
       "commandName": "Project",
       "launchBrowser": true,

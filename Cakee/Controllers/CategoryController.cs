@@ -12,6 +12,7 @@ namespace Cakee.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
+
         private readonly ICategoryService _categoryService;
         private readonly CakeService _cakeService;
 

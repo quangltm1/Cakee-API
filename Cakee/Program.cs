@@ -1,4 +1,4 @@
-using Cakee.Models;
+﻿using Cakee.Models;
 using Cakee.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -9,28 +9,29 @@ using MongoDB.Driver;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // MongoDb Connection
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("MyDb")
-    );
+);
 builder.Services.AddSingleton<DatabaseSettings>(sp =>
     sp.GetRequiredService<IOptions<DatabaseSettings>>().Value
-    );
+);
 builder.Services.AddSingleton<MongoClient>(sp =>
     new MongoClient(builder.Configuration.GetValue<string>("MyDb:ConnectionString"))
-    );
+);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//resolving the CategoryService dependency here
+
+// Resolving the CategoryService dependency here
 builder.Services.AddTransient<ICategoryService, CategoryService>();
-//resolving the CakeService dependency here
+// Resolving the CakeService dependency here
 builder.Services.AddTransient<ICakeService, CakeService>();
-//resolving the UserService dependency here
+// Resolving the UserService dependency here
 builder.Services.AddTransient<IUserService, UserService>();
-//builder.Services.AddTransient<IProductService, ProductService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,10 +41,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Removed to disable HTTPS redirection
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+// Use the PORT environment variable provided by Heroku
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000"; // Default to 5000 if not set
+app.Run($"http://0.0.0.0:{port}"); // Run on the appropriate port
