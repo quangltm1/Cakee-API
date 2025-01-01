@@ -8,40 +8,40 @@ namespace Cakee.Models
         [BsonId]
         public ObjectId Id { get; set; }
 
-        [BsonElement("user_id")]
+        [BsonElement("UserId")]
         public string UserId { get; set; }
 
-        [BsonElement("total_price")]
+        [BsonElement("TotalPrice")]
         public decimal TotalPrice { get; set; }
 
-        [BsonElement("order_status")]
+        [BsonElement("OrderStatus")]
         public string OrderStatus { get; set; } // pending, completed, canceled
 
-        [BsonElement("delivery_status")]
+        [BsonElement("DeliveryStatus")]
         public string DeliveryStatus { get; set; } // pending, in_progress, delivered, failed
 
-        [BsonElement("delivery_date")]
+        [BsonElement("DeliveryDate")]
         public DateTime? DeliveryDate { get; set; }
 
-        [BsonElement("delivery_address")]
+        [BsonElement("DeliveryAddress")]
         public string DeliveryAddress { get; set; }
 
-        [BsonElement("order_details")]
+        [BsonElement("OrderDetails")]
         public List<OrderDetail> OrderDetails { get; set; }
 
-        [BsonElement("created_at")]
+        [BsonElement("CreatedAt")]
         public DateTime CreatedAt { get; set; }
     }
 
     public class OrderDetail
     {
-        [BsonElement("product_id")]
+        [BsonElement("ProductId")]
         public string ProductId { get; set; }
 
-        [BsonElement("quantity")]
+        [BsonElement("Quantity")]
         public int Quantity { get; set; }
 
-        [BsonElement("price")]
+        [BsonElement("Price")]
         public decimal Price { get; set; }
     }
 }

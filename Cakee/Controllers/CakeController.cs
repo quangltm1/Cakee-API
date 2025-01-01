@@ -20,7 +20,7 @@ namespace Cakee.Controllers
             _cakeService = cakeService;
         }
         // GET: api/<CakeController>
-        [HttpGet]
+        [HttpGet("Get All Cake")]
         public async Task<ActionResult<List<Cake>>> GetCake()
         {
             var cakes = await _cakeService.GetAllAsync();
@@ -47,7 +47,7 @@ namespace Cakee.Controllers
             }
             return Ok(response);
         }
-        [HttpGet("getCategoryOfCake")]
+        [HttpGet("Get Category Of Cake")]
         public async Task<IActionResult> GetCategoryOfCake(string cakeId)
         {
             var cakes = await _cakeService.GetCategoryByCakeIdAsync(cakeId);
@@ -59,7 +59,7 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Get Cake By Id")]
         public async Task<ActionResult> GetCakeById(string id)
         {
             var cake = await _cakeService.GetByIdAsync(id);
@@ -83,7 +83,7 @@ namespace Cakee.Controllers
 
 
         // POST api/<CakeController>
-        [HttpPost]
+        [HttpPost("Create Cake")]
         public async Task<ActionResult<Cake>> Post([FromBody] Cake cake)
         {
             // Check if a cake with the same name already exists
@@ -98,7 +98,7 @@ namespace Cakee.Controllers
         }
 
         // PUT api/<CakeController>/5
-        [HttpPut("{id}")]
+        [HttpPut("Update Cake")]
         public async Task<ActionResult> Put(string id, [FromBody] Cake updatedCake)
         {
             // Check if the cake exists
@@ -122,7 +122,7 @@ namespace Cakee.Controllers
 
 
         // DELETE api/<CakeController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete Cake")]
         public async Task<ActionResult> Delete(string id)
         {
             var existingCake = await _cakeService.GetByIdAsync(id);

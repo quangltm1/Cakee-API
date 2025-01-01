@@ -8,19 +8,19 @@ namespace Cakee.Models
         [BsonId]
         public ObjectId Id { get; set; }
 
-        [BsonElement("user_id")]
+        [BsonElement("UserId")]
         public string UserId { get; set; }
 
-        [BsonElement("product_id")]
+        [BsonElement("ProductId")]
         public string ProductId { get; set; }
 
-        [BsonElement("rating")]
+        [BsonElement("RatingValue")]
         public int RatingValue { get; set; } // 1-5 stars
 
-        [BsonElement("comment")]
+        [BsonElement("Comment")]
         public string Comment { get; set; }
 
-        [BsonElement("created_at")]
+        [BsonElement("CreatedAt")]
         public DateTime CreatedAt { get; set; }
     }
 }

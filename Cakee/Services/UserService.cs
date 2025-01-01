@@ -49,10 +49,30 @@ namespace Cakee.Services
                 return await _userCollection.Find(user => user.Id.ToString() == id).FirstOrDefaultAsync();
         }
 
-        public async Task<User> CreateAsync(User user)
+        // Create a new user with role 0 (regular user)
+        public async Task<User> CreateUserAsync(User user)
         {
             try
             {
+                // Ensure the role is set to 0 for regular users
+                user.Role = 0;
+
+                await _userCollection.InsertOneAsync(user);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating user: {ex.Message}");
+                throw new ApplicationException("Unable to create user at this time.", ex);
+            }
+        }
+
+        // Create a new admin with role 1
+        public async Task<User> CreateAdminAsync(User user)
+        {
+            try
+            {
+                user.Role = 1;
                 await _userCollection.InsertOneAsync(user);
                 return user;
             }

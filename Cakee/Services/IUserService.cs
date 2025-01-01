@@ -7,7 +7,8 @@ namespace Cakee.Services
     {
         Task<List<User>> GetAllAsync();
         Task<User> GetByIdAsync(string id);
-        Task<User> CreateAsync(User user);
+        Task<User> CreateUserAsync(User user);
+        Task<User> CreateAdminAsync(User admin);
         Task UpdateAsync(string id, User user);
         Task DeleteAsync(string id);
         Task<IEnumerable<object>> GetByRoleAsync(int role);

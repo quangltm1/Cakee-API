@@ -9,8 +9,9 @@ namespace Cakee.Models
         [BsonRequired]
         public ObjectId Id { get; set; }
         [BsonRequired]
+        [BsonElement("CategoryName")]
         public string CategoryName { get; set; }
-
+        
 
         
     }

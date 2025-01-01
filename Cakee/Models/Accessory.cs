@@ -9,8 +9,10 @@ namespace Cakee.Models
         [BsonRequired]
         public ObjectId Id { get; set; }
         [BsonRequired]
+        [BsonElement("AccessoryName")]
         public string AccessoryName { get; set; }
         [BsonRequired]
+        [BsonElement("AccessoryPrice")]
         public decimal AccessoryPrice { get; set; }
     }
 }

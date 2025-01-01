@@ -60,27 +60,45 @@ namespace Cakee.Controllers
 
         // CREATE a new user
         [HttpPost("Create User")]
-        public async Task<ActionResult> CreateUser([FromBody] User user)
+        public async Task<ActionResult> CreateUser([FromBody] User userDto)
         {
-            if (user == null)
+            if (userDto == null)
             {
                 return BadRequest(new { Message = "User data is invalid" });
             }
-            user.Role = 0;
-            var createdUser = await _userService.CreateAsync(user);
+
+            var user = new User
+            {
+                UserName = userDto.UserName,
+                PassWord = userDto.PassWord,
+                FullName = userDto.FullName,
+                Phone = userDto.Phone,
+            };
+            userDto.Role = 0; // User
+
+            var createdUser = await _userService.CreateUserAsync(user);
             return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
         }
 
         //Create a new admin
         [HttpPost("Create Admin")]
-        public async Task<ActionResult> CreateAdmin([FromBody] User user)
+        public async Task<ActionResult> CreateAdmin([FromBody] User userDto)
         {
-            if (user == null)
+            if (userDto == null)
             {
                 return BadRequest(new { Message = "User data is invalid" });
             }
-            user.Role = 1;
-            var createdUser = await _userService.CreateAsync(user);
+
+            var user = new User
+            {
+                UserName = userDto.UserName,
+                PassWord = userDto.PassWord,
+                FullName = userDto.FullName,
+                Phone = userDto.Phone,
+            };
+            userDto.Role = 1; // Admin
+
+            var createdUser = await _userService.CreateAdminAsync(user);
             return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
         }
 

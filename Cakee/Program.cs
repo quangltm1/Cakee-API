@@ -1,4 +1,5 @@
-﻿using Cakee.Models;
+﻿using Cakee;
+using Cakee.Models;
 using Cakee.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -23,7 +24,13 @@ builder.Services.AddSingleton<MongoClient>(sp =>
     );
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SchemaFilter<UserSchemaFilter>();
+    c.SchemaFilter<CakeSchemaFilter>();
+    c.SchemaFilter<CategorySchemaFilter>();
+});
+
 //resolving the CategoryService dependency here
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 //resolving the CakeService dependency here

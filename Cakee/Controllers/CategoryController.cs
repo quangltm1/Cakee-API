@@ -24,7 +24,7 @@ namespace Cakee.Controllers
 
 
         // GET: api/<CategoryController>
-        [HttpGet]
+        [HttpGet("Get All Category")]
         public async Task<ActionResult<List<Category>>> GetCategory()
         {
             var categories = await _categoryService.GetAllAsync();
@@ -45,7 +45,7 @@ namespace Cakee.Controllers
         
 
         // GET api/<CategoryController>/5
-        [HttpGet("{id}")]
+        [HttpGet("Get Category By Id")]
         public async Task<ActionResult> GetCategoryById(string id)
         {
             var category = await _categoryService.GetByIdAsync(id);
@@ -65,14 +65,14 @@ namespace Cakee.Controllers
         }
 
         // POST api/<CategoryController>
-        [HttpPost]
+        [HttpPost("Create Category")]
         public async Task<ActionResult<Category>> Post([FromBody] Category category)
         {
             var createdCategory = await _categoryService.CreateAsync(category);
             return CreatedAtAction("GetCategoryById", new { id = createdCategory.Id }, createdCategory);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Update Category")]
         public async Task<ActionResult> Put(string id, [FromBody] Category updatedCategory)
         {
             // Check if the category exists
@@ -106,7 +106,7 @@ namespace Cakee.Controllers
                 }
             });
         }
-        [HttpGet("getCategoryNameById/{id}")]
+        [HttpGet("Get Category Name By Id")]
         public async Task<IActionResult> GetByNameByIdAsync(string id)
         {
             var categoryName = await _categoryService.GetByNameByIdAsync(id); // Get category name by ID
@@ -120,7 +120,7 @@ namespace Cakee.Controllers
         }
 
         // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete Category")]
         public async Task<ActionResult> Delete(string id)
         {
             // Check if the category exists

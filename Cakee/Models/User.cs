@@ -9,18 +9,23 @@ namespace Cakee.Models
         [BsonId]
         public ObjectId Id { get; set; }
         [BsonRequired]
+        [BsonElement("UserName")]
         public string UserName { get; set; }
         [BsonRequired]
+        [BsonElement("PassWord")]
         public string PassWord { get; set; }
         [BsonRequired]
+        [BsonElement("FullName")]
         public string FullName { get; set; }
         [BsonRequired]
+        [BsonElement("Phone")]
         public string Phone { get; set; }
 
         [BsonRequired]
+        [BsonElement("Role")]
         public int Role { get; set; }
         [BsonRequired]
-        [BsonElement("created_at")]
+        [BsonElement("CreatedAt")]
         public DateTime CreatedAt { get; set; }
     }
 
