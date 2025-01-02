@@ -1,6 +1,6 @@
 @Cakee_HostAddress = http://localhost:5043
 
-GET {{Cakee_HostAddress}}/weatherforecast/
+GET {{Cakee_HostAddress}}/api/User/GetAllUsers
 Accept: application/json
 
 ###

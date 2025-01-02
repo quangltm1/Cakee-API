@@ -10,7 +10,6 @@ public class UserSchemaFilter : ISchemaFilter
         {
             schema.Properties.Remove("id");
             schema.Properties.Remove("role");
-            schema.Properties.Remove("createdAt");
         }
     }
 }

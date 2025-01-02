@@ -25,7 +25,7 @@ namespace Cakee.Models
         [BsonElement("Role")]
         public int Role { get; set; }
         [BsonRequired]
-        [BsonElement("CreatedAt")]
+        [BsonElement("created_at")]
         public DateTime CreatedAt { get; set; }
     }
 
