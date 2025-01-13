@@ -45,7 +45,7 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
-        [HttpGet("Get Role Of User")]
+        [HttpGet("Get User By Role")]
         public async Task<ActionResult> GetUserByRole(int role)
         {
             var users = await _userService.GetByRoleAsync(role);

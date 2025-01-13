@@ -119,6 +119,44 @@ namespace Cakee.Controllers
             return Ok("Cake updated successfully");
         }
 
+        // PATCH update cake (partial update)
+        [HttpPatch("Update Cake")]
+        public async Task<ActionResult> Patch(string id, [FromBody] Cake updatedCake)
+        {
+            // Check if the cake exists
+            var existingCake = await _cakeService.GetByIdAsync(id);
+            if (existingCake == null)
+            {
+                return NotFound("Cake not found");
+            }
+            // Update the specific fields
+            if(updatedCake.CakeName != null)
+            {
+                existingCake.CakeName = updatedCake.CakeName;
+            }
+            if (updatedCake.CakeSize != null)
+            {
+                existingCake.CakeSize = updatedCake.CakeSize;
+            }
+            if (updatedCake.CakePrice != null)
+            {
+                existingCake.CakePrice = updatedCake.CakePrice;
+            }
+            if (updatedCake.CakeImage != null)
+            {
+                existingCake.CakeImage = updatedCake.CakeImage;
+            }
+            if (updatedCake.CakeDescription != null)
+            {
+                existingCake.CakeDescription = updatedCake.CakeDescription;
+            }
+            if (updatedCake.CakeQuantity != null)
+            {
+                existingCake.CakeQuantity = updatedCake.CakeQuantity;
+            }
+            await _cakeService.UpdateAsync(id, existingCake);
+            return Ok("Cake updated successfully");
+        }
 
 
         // DELETE api/<CakeController>/5

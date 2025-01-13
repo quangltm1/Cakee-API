@@ -67,7 +67,9 @@ namespace Cakee.Services
 
         public async Task UpdateAsync(string id, Cake cake)
         {
-            await _cakeCollection.ReplaceOneAsync(c => c.Id.ToString() == id, cake);
+            //Ensure the cake has the correct Id
+            cake.Id = new ObjectId(id);
+            await _cakeCollection.ReplaceOneAsync(c => c.Id == cake.Id, cake);
         }
     }
 }

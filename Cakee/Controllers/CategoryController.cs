@@ -106,6 +106,33 @@ namespace Cakee.Controllers
                 }
             });
         }
+
+        // PATCH an existing category (partial update)
+        [HttpPatch("Update Category")]
+        public async Task<ActionResult> Patch(string id, [FromBody] Category updatedCategory)
+        {
+            // Check if the category exists
+            var existingCategory = await _categoryService.GetByIdAsync(id);
+            if (existingCategory == null)
+            {
+                return NotFound(new { message = "Category not found." });
+            }
+            // Update the category name
+            existingCategory.CategoryName = updatedCategory.CategoryName;
+            // Save changes
+            await _categoryService.UpdateAsync(id, existingCategory);
+            // Return a success message
+            return Ok(new
+            {
+                message = "Category updated successfully.",
+                category = new
+                {
+                    Id = existingCategory.Id.ToString(),
+                    CategoryName = existingCategory.CategoryName
+                }
+            });
+        }
+
         [HttpGet("Get Category Name By Id")]
         public async Task<IActionResult> GetByNameByIdAsync(string id)
         {

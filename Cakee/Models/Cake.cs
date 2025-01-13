@@ -9,16 +9,16 @@ public class Cake
     public ObjectId Id { get; set; }  // Assuming MongoDB ObjectId is used
     [BsonRequired]
     [BsonElement("CakeName")]
-    public string CakeName { get; set; }  // Correct property name
+    public required string CakeName { get; set; }  // Correct property name
     [BsonElement("CakeSize")]
     public int CakeSize { get; set; }
     [BsonElement("CakeDescription")]
-    public string CakeDescription { get; set; }
+    public required string CakeDescription { get; set; }
     [BsonRequired]
     [BsonElement("CakePrice")]
-    public decimal CakePrice { get; set; }
+    public required decimal CakePrice { get; set; }
     [BsonElement("CakeImage")]
-    public string CakeImage { get; set; }
+    public string? CakeImage { get; set; }
     [BsonRequired]
     [BsonElement("CakeCategoryId")]
     public ObjectId CakeCategoryId { get; set; }
