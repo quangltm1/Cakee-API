@@ -12,5 +12,10 @@ namespace Cakee.Services
         Task UpdateAsync(string id, User user);
         Task DeleteAsync(string id);
         Task<IEnumerable<object>> GetByRoleAsync(int role);
+        Task<User> GetUserByUserNameAsync(string userName);
+        Task SaveRefreshTokenAsync(RefreshToken refreshTokenModel);
+        Task<RefreshToken> GetRefreshTokenAsync(string token);
+        Task UpdateRefreshTokenAsync(RefreshToken refreshToken);
     }
+
 }

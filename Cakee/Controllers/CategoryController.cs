@@ -4,15 +4,14 @@ using Cakee.Services;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Cakee.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] // Bổ sung authorize cho toàn bộ controller
     public class CategoryController : ControllerBase
     {
-
         private readonly ICategoryService _categoryService;
         private readonly CakeService _cakeService;
 
@@ -21,10 +20,9 @@ namespace Cakee.Controllers
             _categoryService = categoryService;
         }
 
-
-
         // GET: api/<CategoryController>
         [HttpGet("Get All Category")]
+        [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<ActionResult<List<Category>>> GetCategory()
         {
             var categories = await _categoryService.GetAllAsync();
@@ -42,10 +40,9 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
-        
-
         // GET api/<CategoryController>/5
         [HttpGet("Get Category By Id")]
+        [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<ActionResult> GetCategoryById(string id)
         {
             var category = await _categoryService.GetByIdAsync(id);
@@ -134,6 +131,7 @@ namespace Cakee.Controllers
         }
 
         [HttpGet("Get Category Name By Id")]
+        [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<IActionResult> GetByNameByIdAsync(string id)
         {
             var categoryName = await _categoryService.GetByNameByIdAsync(id); // Get category name by ID
@@ -166,6 +164,5 @@ namespace Cakee.Controllers
                 Id = id
             });
         }
-
     }
 }

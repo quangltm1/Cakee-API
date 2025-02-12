@@ -4,21 +4,22 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Cakee.Services
 {
     public class UserService : IUserService
     {
         private readonly IMongoCollection<User> _userCollection;
+        private readonly IMongoCollection<RefreshToken> _refreshTokenCollection;
+
 
         public UserService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
             _userCollection = database.GetCollection<User>(dbSettings.Value.UsersCollectionName);
+            _refreshTokenCollection = database.GetCollection<RefreshToken>(dbSettings.Value.RefreshTokensCollectionName);
         }
-
-
-
 
         public async Task<List<User>> GetAllAsync()
         {
@@ -43,31 +44,31 @@ namespace Cakee.Services
             }
         }
 
-
         public async Task<User> GetByIdAsync(string id)
         {
-                return await _userCollection.Find(user => user.Id.ToString() == id).FirstOrDefaultAsync();
+            return await _userCollection.Find(user => user.Id.ToString() == id).FirstOrDefaultAsync();
         }
 
-        // Create a new user with role 0 (regular user)
+        public async Task<User> GetUserByUserNameAsync(string username)
+        {
+            return await _userCollection.Find(user => user.UserName == username).FirstOrDefaultAsync();
+        }
+
         public async Task<User> CreateUserAsync(User user)
         {
             try
             {
-                // Ensure the role is set to 0 for regular users
                 user.Role = 0;
-
                 await _userCollection.InsertOneAsync(user);
                 return user;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating user: {ex.Message}");
-                throw new ApplicationException("Unable to create user at this time.", ex);
+                Console.WriteLine($"Lỗi tạo người dùng: {ex.Message}");
+                throw new ApplicationException("Không thể tạo người dùng tại thời điểm này.", ex);
             }
         }
 
-        // Create a new admin with role 1
         public async Task<User> CreateAdminAsync(User user)
         {
             try
@@ -78,8 +79,8 @@ namespace Cakee.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating user: {ex.Message}");
-                throw new ApplicationException("Unable to create user at this time.", ex);
+                Console.WriteLine($"Lỗi tạo admin: {ex.Message}");
+                throw new ApplicationException("Không thể tạo admin tại thời điểm này.", ex);
             }
         }
 
@@ -87,14 +88,12 @@ namespace Cakee.Services
         {
             try
             {
-                // Ensure the user exists
                 var existingUser = await _userCollection.Find(u => u.Id.ToString() == id).FirstOrDefaultAsync();
                 if (existingUser == null)
                 {
                     throw new ApplicationException($"No user found with ID {id} to update.");
                 }
 
-                // Update only the modified fields
                 var update = Builders<User>.Update
                     .Set(u => u.UserName, user.UserName)
                     .Set(u => u.FullName, user.FullName)
@@ -120,16 +119,10 @@ namespace Cakee.Services
         {
             try
             {
-                // Ensure the ID is properly parsed to ObjectId
                 var objectId = new ObjectId(id);
-
-                // Create a filter for the user with the given ID
                 var filter = Builders<User>.Filter.Eq(user => user.Id, objectId);
-
-                // Perform the delete operation
                 var result = await _userCollection.DeleteOneAsync(filter);
 
-                // Check if no documents were deleted
                 if (result.DeletedCount == 0)
                 {
                     throw new ApplicationException($"No user found with ID {id} to delete.");
@@ -137,12 +130,10 @@ namespace Cakee.Services
             }
             catch (Exception ex)
             {
-                // Log and rethrow the exception
                 Console.WriteLine($"Error deleting user: {ex.Message}");
                 throw new ApplicationException($"Unable to delete user with ID {id}.", ex);
             }
         }
-
 
         public async Task<IEnumerable<object>> GetByRoleAsync(int role)
         {
@@ -171,6 +162,29 @@ namespace Cakee.Services
                 Console.WriteLine($"Error fetching users by role: {ex.Message}");
                 throw new ApplicationException($"Unable to fetch users with role {role}.", ex);
             }
+        }
+
+        public async Task SaveRefreshTokenAsync(RefreshToken refreshTokenModel)
+        {
+            try
+            {
+                await _refreshTokenCollection.InsertOneAsync(refreshTokenModel);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving refresh token: {ex.Message}");
+                throw new ApplicationException("Unable to save refresh token at this time.", ex);
+            }
+        }
+
+        public async Task<RefreshToken> GetRefreshTokenAsync(string token)
+        {
+            return await _refreshTokenCollection.Find<RefreshToken>(rt => rt.Token == token).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateRefreshTokenAsync(RefreshToken refreshToken)
+        {
+            await _refreshTokenCollection.ReplaceOneAsync(rt => rt.Id == refreshToken.Id, refreshToken);
         }
     }
 }

@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Cakee.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] // Bổ sung authorize cho toàn bộ controller
     public class CakeController : ControllerBase
     {
         private readonly ICakeService _cakeService;
@@ -19,8 +18,10 @@ namespace Cakee.Controllers
         {
             _cakeService = cakeService;
         }
+
         // GET: api/<CakeController>
         [HttpGet("Get All Cake")]
+        [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<ActionResult<List<Cake>>> GetCake()
         {
             var cakes = await _cakeService.GetAllAsync();
@@ -47,7 +48,9 @@ namespace Cakee.Controllers
             }
             return Ok(response);
         }
+
         [HttpGet("Get Category Of Cake")]
+        [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<IActionResult> GetCategoryOfCake(string cakeId)
         {
             var cakes = await _cakeService.GetCategoryByCakeIdAsync(cakeId);
@@ -60,6 +63,7 @@ namespace Cakee.Controllers
         }
 
         [HttpGet("Get Cake By Id")]
+        [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<ActionResult> GetCakeById(string id)
         {
             var cake = await _cakeService.GetByIdAsync(id);
@@ -80,7 +84,6 @@ namespace Cakee.Controllers
             };
             return Ok(response); // Return the found cake
         }
-
 
         // POST api/<CakeController>
         [HttpPost("Create Cake")]
@@ -130,7 +133,7 @@ namespace Cakee.Controllers
                 return NotFound("Cake not found");
             }
             // Update the specific fields
-            if(updatedCake.CakeName != null)
+            if (updatedCake.CakeName != null)
             {
                 existingCake.CakeName = updatedCake.CakeName;
             }
@@ -157,7 +160,6 @@ namespace Cakee.Controllers
             await _cakeService.UpdateAsync(id, existingCake);
             return Ok("Cake updated successfully");
         }
-
 
         // DELETE api/<CakeController>/5
         [HttpDelete("Delete Cake")]
