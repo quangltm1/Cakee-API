@@ -64,6 +64,10 @@ namespace Cakee.Services.Service
             return await _cakeCollection.Find(cake => cake.CakeName == cakeName).FirstOrDefaultAsync();
         }
 
+        public async Task<Cake> GetBySizeAsync(string sizeName)
+        {
+            return await _cakeCollection.Find(cake => cake.CakeSize.ToString() == sizeName).FirstOrDefaultAsync();
+        }
 
 
         public async Task UpdateAsync(string id, Cake cake)

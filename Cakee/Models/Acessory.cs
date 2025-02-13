@@ -3,16 +3,16 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Cakee.Models
 {
-    public class Accessory
+    public class Acessory
     {
         [BsonId]
         [BsonRequired]
         public ObjectId Id { get; set; }
         [BsonRequired]
-        [BsonElement("AccessoryName")]
-        public string AccessoryName { get; set; }
+        [BsonElement("AcessoryName")]
+        public string? AcessoryName { get; set; }
         [BsonRequired]
-        [BsonElement("AccessoryPrice")]
-        public decimal AccessoryPrice { get; set; }
+        [BsonElement("AcessoryPrice")]
+        public decimal AcessoryPrice { get; set; }
     }
 }

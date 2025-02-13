@@ -1,9 +1,11 @@
-﻿using Cakee.Services.IService;
+﻿using Cakee.Models;
+using Cakee.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cakee.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -13,6 +15,103 @@ namespace Cakee.Controllers
         public AcessoryController(IAcessoryService acessoryService)
         {
             _acessoryService = acessoryService;
+        }
+
+        [HttpGet("Get All Acessory")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<Acessory>>> GetAcessory()
+        {
+            var acessories = await _acessoryService.GetAllAsync();
+            var response = new List<object>(); // This will hold the formatted response
+            //if acessory not null then show, if null then show message not found
+            if (acessories == null)
+            {
+                return NotFound("Acessory not found");
+            }
+            foreach (var acessory in acessories)
+            {
+                response.Add(new
+                {
+                    Id = acessory.Id.ToString(),
+                    AcessoryName = acessory.AcessoryName,
+                    AcessoryPrice = acessory.AcessoryPrice,
+                });
+            }
+            return Ok(response);
+        }
+
+        [HttpGet("Get Acessory By Id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAcessoryById(string id)
+        {
+            var acessory = await _acessoryService.GetByIdAsync(id);
+            if (acessory == null)
+            {
+                return NotFound("Acessory not found");
+            }
+            var response = new
+            {
+                Id = acessory.Id.ToString(),
+                AcessoryName = acessory.AcessoryPrice,
+                AcessoryPrice = acessory.AcessoryPrice,
+            };
+            return Ok(response);
+
+        }
+
+        [HttpGet("Get Acessory By Name")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAcessoryByName(string acessoryName)
+        {
+            var acessory = await _acessoryService.GetByNameAsync(acessoryName);
+            if (acessory == null)
+            {
+                return NotFound("Acessory not found");
+            }
+            var response = new
+            {
+                Id = acessory.Id.ToString(),
+                AcessoryName = acessory.AcessoryName,
+                AcessoryPrice = acessory.AcessoryPrice,
+            };
+            return Ok(response);
+        }
+
+        [HttpPost("Create Acessory")]
+        public async Task<ActionResult> CreateAcessory(Acessory acessory)
+        {
+            // Check if the acessory name exists
+            var existingAcessory = await _acessoryService.GetByNameAsync(acessory.AcessoryName);
+            if (existingAcessory != null)
+            {
+                return BadRequest("Acessory name already exists");
+            }
+            await _acessoryService.CreateAsync(acessory);
+            return Ok(acessory);
+        }
+
+        [HttpPatch("Update Acessory")]
+        public async Task<ActionResult> UpdateAcessory(string id, Acessory acessory)
+        {
+            var existingAcessory = await _acessoryService.GetByIdAsync(id);
+            if (existingAcessory == null)
+            {
+                return NotFound("Acessory not found");
+            }
+            await _acessoryService.UpdateAsync(id, acessory);
+            return Ok(acessory);
+        }
+
+        [HttpDelete("Delete Acessory")]
+        public async Task<ActionResult> DeleteAcessory(string id)
+        {
+            var existingAcessory = await _acessoryService.GetByIdAsync(id);
+            if (existingAcessory == null)
+            {
+                return NotFound("Acessory not found");
+            }
+            await _acessoryService.DeleteAsync(id);
+            return Ok("Acessory deleted successfully");
         }
     }
 }

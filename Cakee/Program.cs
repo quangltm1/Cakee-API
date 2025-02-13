@@ -36,6 +36,14 @@ var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {
+        opt.Events = new JwtBearerEvents
+        {
+            OnChallenge = context =>
+            {
+                context.Response.Headers["WWW-Authenticate"] = context.Response.Headers["WWW-Authenticate"].ToString().Replace("Bearer ", "");
+                return Task.CompletedTask;
+            }
+        };
         opt.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = false,
@@ -46,13 +54,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"{token}\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey
@@ -75,6 +84,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SchemaFilter<CakeSchemaFilter>();
     c.SchemaFilter<CategorySchemaFilter>();
 });
+
 
 // Resolving the dependencies
 builder.Services.AddTransient<ICategoryService, CategoryService>();
@@ -101,7 +111,11 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers(); // Fixed incorrect method usage
+    endpoints.MapControllers();
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=User}/{action=Index}/{id?}");
 });
+
 
 app.Run();

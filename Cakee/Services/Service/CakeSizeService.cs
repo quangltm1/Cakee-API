@@ -42,5 +42,10 @@ namespace Cakee.Services.Service
             await _cakesizecollection.ReplaceOneAsync(c => c.Id.ToString() == id, cakeSize);
         }
 
+        public async Task<CakeSize> GetByNameAsync(string? sizeName)
+        {
+            return await _cakesizecollection.Find(cakeSize => cakeSize.SizeName == sizeName).FirstOrDefaultAsync();
+        }
+
     }
 }

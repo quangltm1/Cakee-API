@@ -1,5 +1,6 @@
 ﻿using Cakee.Models;
 using Cakee.Services.IService;
+using Cakee.Services.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +12,12 @@ namespace Cakee.Controllers
     public class CakeSizeController : ControllerBase
     {
         private readonly ICakeSizeService _cakeSizeService;
-        public CakeSizeController(ICakeSizeService cakeSizeService)
+        private readonly ICakeService _cakeService; 
+
+        public CakeSizeController(ICakeSizeService cakeSizeService, ICakeService cakeService)
         {
             _cakeSizeService = cakeSizeService;
+            _cakeService = cakeService;
         }
 
         [HttpGet("Get All Cake Size")]
@@ -58,9 +62,26 @@ namespace Cakee.Controllers
         [HttpPost("Create Cake Size")]
         public async Task<ActionResult> CreateCakeSize(CakeSize cakesize)
         {
-            await _cakeSizeService.CreateAsync(cakesize);
-            return Ok("Cake Size created successfully");
+            // Check if the size name exists
+            var existingCakeSize = await _cakeSizeService.GetByNameAsync(cakesize.SizeName);
+            if (existingCakeSize != null)
+            {
+                return BadRequest(new { message = "Size already exists, enter another size." });
+            }
+            // Create the cake size
+            var newCakeSize = await _cakeSizeService.CreateAsync(cakesize);
+            // Return a success message
+            return CreatedAtAction(nameof(GetCakeSizeById), new { id = newCakeSize.Id.ToString() }, new
+            {
+                message = "Cake Size created successfully.",
+                cakesize = new
+                {
+                    Id = newCakeSize.Id.ToString(),
+                    CakeSizeName = newCakeSize.SizeName
+                }
+            });
         }
+
 
         [HttpPatch("Update Cake Size")]
         public async Task<ActionResult> UpdateCakeSize(string id, [FromBody] CakeSize request)
@@ -97,6 +118,12 @@ namespace Cakee.Controllers
             if (existingCakeSize == null)
             {
                 return NotFound(new { message = "Cake Size not found." });
+            }
+            // Check if cake size is used in any cake
+            var cake = await _cakeService.GetBySizeAsync(existingCakeSize.SizeName);
+            if (cake != null)
+            {
+                return BadRequest(new { message = "Cake Size is used in a cake, cannot delete." });
             }
             // Delete the cake size
             await _cakeSizeService.DeleteAsync(id);
