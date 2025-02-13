@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Cakee.Models;
-using Cakee.Services;
 using Cakee;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -9,7 +8,9 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection; // Added missing using directive
+using Microsoft.Extensions.DependencyInjection;
+using Cakee.Services.Service;
+using Cakee.Services.IService; // Added missing using directive
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,10 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<ICakeService, CakeService>();
 builder.Services.AddTransient<ICakeSizeService, CakeSizeService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IBillService, BillService>();
+builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddTransient<IAcessoryService, AcessoryService>();
+builder.Services.AddTransient<IStatisticalService, StatisticalService>();
 
 var app = builder.Build();
 

@@ -1,5 +1,4 @@
 ﻿using Cakee.Models;
-using Cakee.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
+using Cakee.Services.IService;
 
 namespace Cakee.Controllers
 {

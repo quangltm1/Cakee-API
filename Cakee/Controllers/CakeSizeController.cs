@@ -1,5 +1,5 @@
 ﻿using Cakee.Models;
-using Cakee.Services;
+using Cakee.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,7 +56,6 @@ namespace Cakee.Controllers
         }
 
         [HttpPost("Create Cake Size")]
-        [AllowAnonymous]
         public async Task<ActionResult> CreateCakeSize(CakeSize cakesize)
         {
             await _cakeSizeService.CreateAsync(cakesize);
@@ -64,8 +63,7 @@ namespace Cakee.Controllers
         }
 
         [HttpPatch("Update Cake Size")]
-        [AllowAnonymous]
-        public async Task<ActionResult> UpdateCakeSize(string id, CakeSize cakesize)
+        public async Task<ActionResult> UpdateCakeSize(string id, [FromBody] CakeSize request)
         {
             // Check if the cake size exists
             var existingCakeSize = await _cakeSizeService.GetByIdAsync(id);
@@ -74,9 +72,9 @@ namespace Cakee.Controllers
                 return NotFound(new { message = "Cake Size not found." });
             }
             // Update the cake size name
-            existingCakeSize.SizeName = cakesize.SizeName;
+            existingCakeSize.SizeName = request.SizeName;
             // Save changes
-            await _cakeSizeService.UpdateAsync(id, cakesize);
+            await _cakeSizeService.UpdateAsync(id, existingCakeSize);
             // Return a success message
             return Ok(
                 new
@@ -90,8 +88,8 @@ namespace Cakee.Controllers
                 });
         }
 
+
         [HttpDelete("Delete Cake Size")]
-        [AllowAnonymous]
         public async Task<ActionResult> DeleteCakeSize(string id)
         {
             // Check if the cake size exists

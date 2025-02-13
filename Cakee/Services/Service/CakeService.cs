@@ -1,9 +1,10 @@
 ﻿using Cakee.Models;
+using Cakee.Services.IService;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Cakee.Services
+namespace Cakee.Services.Service
 {
     public class CakeService : ICakeService
     {

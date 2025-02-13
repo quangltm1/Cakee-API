@@ -1,7 +1,7 @@
 ﻿using Cakee.Models;
 using MongoDB.Bson;
 
-namespace Cakee.Services
+namespace Cakee.Services.IService
 {
     public interface IUserService
     {

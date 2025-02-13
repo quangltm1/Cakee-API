@@ -1,4 +1,5 @@
 ﻿using Cakee.Models;
+using Cakee.Services.IService;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -6,7 +7,7 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Cakee.Services
+namespace Cakee.Services.Service
 {
     public class UserService : IUserService
     {
@@ -151,10 +152,10 @@ namespace Cakee.Services
                 return users.Select(user => new
                 {
                     Id = user.Id.ToString(),
-                    UserName = user.UserName,
-                    FullName = user.FullName,
-                    Phone = user.Phone,
-                    Role = user.Role
+                    user.UserName,
+                    user.FullName,
+                    user.Phone,
+                    user.Role
                 });
             }
             catch (Exception ex)
@@ -179,7 +180,7 @@ namespace Cakee.Services
 
         public async Task<RefreshToken> GetRefreshTokenAsync(string token)
         {
-            return await _refreshTokenCollection.Find<RefreshToken>(rt => rt.Token == token).FirstOrDefaultAsync();
+            return await _refreshTokenCollection.Find(rt => rt.Token == token).FirstOrDefaultAsync();
         }
 
         public async Task UpdateRefreshTokenAsync(RefreshToken refreshToken)

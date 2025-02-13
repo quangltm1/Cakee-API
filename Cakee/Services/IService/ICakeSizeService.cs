@@ -1,6 +1,6 @@
 ﻿using Cakee.Models;
 
-namespace Cakee.Services
+namespace Cakee.Services.IService
 {
     public interface ICakeSizeService
     {

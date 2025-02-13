@@ -1,8 +1,10 @@
 ﻿using Cakee.Models;
+using Cakee.Services.IService;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Cakee.Services
+namespace Cakee.Services.Service
 {
     public class CakeSizeService : ICakeSizeService
     {
@@ -37,7 +39,8 @@ namespace Cakee.Services
         }
         public async Task UpdateAsync(string id, CakeSize cakeSize)
         {
-            await _cakesizecollection.ReplaceOneAsync(cakeSize => cakeSize.Id.ToString() == id, cakeSize);
+            await _cakesizecollection.ReplaceOneAsync(c => c.Id.ToString() == id, cakeSize);
         }
+
     }
 }

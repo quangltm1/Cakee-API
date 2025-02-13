@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Cakee.Services
+namespace Cakee.Services.IService
 {
     public interface ICakeService
     {
