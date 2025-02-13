@@ -8,5 +8,7 @@
         public string? CakesCollectionName { get; set; }
         public string? UsersCollectionName { get; set; }
         public string? RefreshTokensCollectionName { get; set; }
+        public string? CakeSizesCollectionName { get; set; }
+
     }
 }

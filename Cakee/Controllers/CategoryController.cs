@@ -69,40 +69,40 @@ namespace Cakee.Controllers
             return CreatedAtAction("GetCategoryById", new { id = createdCategory.Id }, createdCategory);
         }
 
-        [HttpPut("Update Category")]
-        public async Task<ActionResult> Put(string id, [FromBody] Category updatedCategory)
-        {
-            // Check if the category exists
-            var existingCategory = await _categoryService.GetByIdAsync(id);
-            if (existingCategory == null)
-            {
-                return NotFound(new { message = "Category not found." });
-            }
+        //[HttpPut("Update Category")]
+        //public async Task<ActionResult> Put(string id, [FromBody] Category updatedCategory)
+        //{
+        //    // Check if the category exists
+        //    var existingCategory = await _categoryService.GetByIdAsync(id);
+        //    if (existingCategory == null)
+        //    {
+        //        return NotFound(new { message = "Category not found." });
+        //    }
 
-            // Verify if the new category name already exists (excluding the current category)
-            var categoryWithSameName = await _categoryService.GetByNameAsync(updatedCategory.CategoryName);
-            if (categoryWithSameName != null && categoryWithSameName.Id != existingCategory.Id)
-            {
-                return BadRequest(new { message = "Category name already exists." });
-            }
+        //    // Verify if the new category name already exists (excluding the current category)
+        //    var categoryWithSameName = await _categoryService.GetByNameAsync(updatedCategory.CategoryName);
+        //    if (categoryWithSameName != null && categoryWithSameName.Id != existingCategory.Id)
+        //    {
+        //        return BadRequest(new { message = "Category name already exists." });
+        //    }
 
-            // Update the category name
-            existingCategory.CategoryName = updatedCategory.CategoryName;
+        //    // Update the category name
+        //    existingCategory.CategoryName = updatedCategory.CategoryName;
 
-            // Save changes
-            await _categoryService.UpdateAsync(id, existingCategory);
+        //    // Save changes
+        //    await _categoryService.UpdateAsync(id, existingCategory);
 
-            // Return a success message
-            return Ok(new
-            {
-                message = "Category updated successfully.",
-                category = new
-                {
-                    Id = existingCategory.Id.ToString(),
-                    CategoryName = existingCategory.CategoryName
-                }
-            });
-        }
+        //    // Return a success message
+        //    return Ok(new
+        //    {
+        //        message = "Category updated successfully.",
+        //        category = new
+        //        {
+        //            Id = existingCategory.Id.ToString(),
+        //            CategoryName = existingCategory.CategoryName
+        //        }
+        //    });
+        //}
 
         // PATCH an existing category (partial update)
         [HttpPatch("Update Category")]

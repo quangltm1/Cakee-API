@@ -100,27 +100,27 @@ namespace Cakee.Controllers
             return CreatedAtAction("GetCakeById", new { id = createdCake.Id }, createdCake);
         }
 
-        // PUT api/<CakeController>/5
-        [HttpPut("Update Cake")]
-        public async Task<ActionResult> Put(string id, [FromBody] Cake updatedCake)
-        {
-            // Check if the cake exists
-            var existingCake = await _cakeService.GetByIdAsync(id);
-            if (existingCake == null)
-            {
-                return NotFound("Cake not found");
-            }
+        //// PUT api/<CakeController>/5
+        //[HttpPut("Update Cake")]
+        //public async Task<ActionResult> Put(string id, [FromBody] Cake updatedCake)
+        //{
+        //    // Check if the cake exists
+        //    var existingCake = await _cakeService.GetByIdAsync(id);
+        //    if (existingCake == null)
+        //    {
+        //        return NotFound("Cake not found");
+        //    }
 
-            // Check if a cake with the updated name already exists (except for the current cake)
-            var duplicateCake = await _cakeService.GetByNameAsync(updatedCake.CakeName);
-            if (duplicateCake != null && duplicateCake.Id.ToString() != id)
-            {
-                return BadRequest(new { message = "Cake name already exists." });
-            }
+        //    // Check if a cake with the updated name already exists (except for the current cake)
+        //    var duplicateCake = await _cakeService.GetByNameAsync(updatedCake.CakeName);
+        //    if (duplicateCake != null && duplicateCake.Id.ToString() != id)
+        //    {
+        //        return BadRequest(new { message = "Cake name already exists." });
+        //    }
 
-            await _cakeService.UpdateAsync(id, updatedCake);
-            return Ok("Cake updated successfully");
-        }
+        //    await _cakeService.UpdateAsync(id, updatedCake);
+        //    return Ok("Cake updated successfully");
+        //}
 
         // PATCH update cake (partial update)
         [HttpPatch("Update Cake")]
