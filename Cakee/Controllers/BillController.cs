@@ -11,9 +11,15 @@ namespace Cakee.Controllers
     public class BillController : ControllerBase
     {
         private readonly IBillService _billService;
-        public BillController(IBillService billService)
+        private readonly IUserService _userService;
+        private readonly ICakeService _cakeService;
+        private readonly IAcessoryService _acessoryService;
+        public BillController(IBillService billService, IUserService userService, ICakeService cakeService, IAcessoryService acessoryService)
         {
             _billService = billService;
+            _userService = userService;
+            _cakeService = cakeService;
+            _acessoryService = acessoryService;
         }
         [HttpGet("Get All Bill")]
         [AllowAnonymous]
@@ -28,22 +34,25 @@ namespace Cakee.Controllers
             }
             foreach (var bill in bills)
             {
+                var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
+                var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
+                var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId.ToString());
                 response.Add(new
                 {
                     Id = bill.Id.ToString(),
-                    BillFullName = bill.BillFullName,
-                    BillName = bill.BillName,
-                    BillPhone = bill.BillPhone,
-                    BillAddress = bill.BillAddress,
-                    BillDeliveryDate = bill.BillDeliveryDate,
-                    BillReceiveDate = bill.BillReceiveDate,
-                    BillDeposit = bill.BillDeposit,
-                    BillTotal = bill.BillTotal,
-                    BillStatus = bill.BillStatus,
-                    BillNote = bill.BillNote,
-                    BillContent = bill.BillContent,
-                    UserId = bill.UserId.ToString(),
-                    CakeIds = bill.CakeIds
+                    UserName = user?.FullName,
+                    Address = bill.BillDeliveryAddress,
+                    DeliveryDate = bill.BillDeliveryDate,
+                    Deposit = bill.BillDeposit,
+                    Note = bill.BillNote,
+                    ReceiveDate = bill.BillReceiveDate,
+                    Status = bill.BillStatus,
+                    Total = bill.BillTotal,
+                    CakeContent = bill.BillCakeContent,
+                    CakeName = cake?.CakeName,
+                    CakeSize = cake?.CakeSize,
+                    Acessory = acessory?.AcessoryName,
+                    Quantity = bill.BillCakeQuantity,
                 });
             }
             return Ok(response);
@@ -57,22 +66,25 @@ namespace Cakee.Controllers
             {
                 return NotFound("Bill not found");
             }
+            var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
+            var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
+            var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId.ToString());
             var response = new
             {
                 Id = bill.Id.ToString(),
-                BillFullName = bill.BillFullName,
-                BillName = bill.BillName,
-                BillPhone = bill.BillPhone,
-                BillAddress = bill.BillAddress,
-                BillDeliveryDate = bill.BillDeliveryDate,
-                BillReceiveDate = bill.BillReceiveDate,
-                BillDeposit = bill.BillDeposit,
-                BillTotal = bill.BillTotal,
-                BillStatus = bill.BillStatus,
-                BillNote = bill.BillNote,
-                BillContent = bill.BillContent,
-                UserId = bill.UserId.ToString(),
-                CakeIds = bill.CakeIds
+                UserName = user?.FullName,
+                Address = bill.BillDeliveryAddress,
+                DeliveryDate = bill.BillDeliveryDate,
+                Deposit = bill.BillDeposit,
+                Note = bill.BillNote,
+                ReceiveDate = bill.BillReceiveDate,
+                Status = bill.BillStatus,
+                Total = bill.BillTotal,
+                CakeContent = bill.BillCakeContent,
+                CakeName = cake?.CakeName,
+                CakeSize = cake?.CakeSize,
+                Acessory = acessory?.AcessoryName,
+                Quantity = bill.BillCakeQuantity,
             };
             return Ok(response);
         }
@@ -96,27 +108,31 @@ namespace Cakee.Controllers
             var billId = existingBill.Id;
             bill.Id = billId;
             await _billService.UpdateAsync(id, bill);
+            var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
+            var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
+            var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId.ToString());
             return Ok
             (
                 new
                 {
                     message = "Bill updated successfully",
+
                     bill = new
                     {
                         Id = bill.Id.ToString(),
-                        BillFullName = bill.BillFullName,
-                        BillName = bill.BillName,
-                        BillPhone = bill.BillPhone,
-                        BillAddress = bill.BillAddress,
-                        BillDeliveryDate = bill.BillDeliveryDate,
-                        BillReceiveDate = bill.BillReceiveDate,
-                        BillDeposit = bill.BillDeposit,
-                        BillTotal = bill.BillTotal,
-                        BillStatus = bill.BillStatus,
-                        BillNote = bill.BillNote,
-                        BillContent = bill.BillContent,
-                        UserId = bill.UserId.ToString(),
-                        CakeIds = bill.CakeIds
+                        UserName = user?.FullName,
+                        Address = bill.BillDeliveryAddress,
+                        DeliveryDate = bill.BillDeliveryDate,
+                        Deposit = bill.BillDeposit,
+                        Note = bill.BillNote,
+                        ReceiveDate = bill.BillReceiveDate,
+                        Status = bill.BillStatus,
+                        Total = bill.BillTotal,
+                        CakeContent = bill.BillCakeContent,
+                        CakeName = cake?.CakeName,
+                        CakeSize = cake?.CakeSize,
+                        Acessory = acessory?.AcessoryName,
+                        Quantity = bill.BillCakeQuantity,
                     }
                 }
             );

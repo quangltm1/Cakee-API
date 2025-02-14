@@ -14,30 +14,33 @@ namespace Cakee.Controllers
         private readonly ICakeService _cakeService;
         private readonly ICategoryService _cate;
 
-        public CakeController(ICakeService cakeService)
+        public CakeController(ICakeService cakeService, ICategoryService cate)
         {
             _cakeService = cakeService;
+            _cate = cate;
         }
 
         // GET: api/<CakeController>
         [HttpGet("Get All Cake")]
         [AllowAnonymous] // Cho phép truy cập không cần xác thực
-        public async Task<ActionResult<List<Cake>>> GetCake()
+        public async Task<ActionResult<List<object>>> GetCake()
         {
             var cakes = await _cakeService.GetAllAsync();
             var response = new List<object>(); // This will hold the formatted response
-            //if cake not null then show, if null then show message not found
+
             if (cakes == null)
             {
                 return NotFound("Cake not found");
             }
+
             foreach (var cake in cakes)
             {
+                var category = await _cate.GetByIdAsync(cake.CakeCategoryId.ToString());
                 response.Add(new
                 {
                     Id = cake.Id.ToString(),
                     CakeName = cake.CakeName,
-                    CakeCategoryId = cake.CakeCategoryId.ToString(),
+                    CakeCategoryName = category?.CategoryName, // Display category name
                     CakeSize = cake.CakeSize,
                     CakeDescription = cake.CakeDescription,
                     CakePrice = cake.CakePrice,
@@ -71,6 +74,7 @@ namespace Cakee.Controllers
             {
                 return NotFound("Cake not found");
             }
+            var category = await _cate.GetByIdAsync(cake.CakeCategoryId.ToString());
             var response = new
             {
                 //Id = cake.Id.ToString(),  // Convert ObjectId to string
@@ -78,7 +82,7 @@ namespace Cakee.Controllers
                 CakeSize = cake.CakeSize,
                 CakePrice = cake.CakePrice,
                 CakeImage = cake.CakeImage,
-                CakeCategory = cake.CakeCategoryId.ToString(), // Changed to CakeCategoryName
+                CategoryName = category?.CategoryName,// Changed to CakeCategoryName
                 CakeRating = cake.CakeRating,
                 CakeQuantity = cake.CakeQuantity
             };

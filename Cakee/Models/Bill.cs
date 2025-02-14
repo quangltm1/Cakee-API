@@ -1,8 +1,27 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace Cakee.Models
 {
+    public class CustomDateTimeSerializer : SerializerBase<DateTime>
+    {
+        public override DateTime Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        {
+            var bsonType = context.Reader.GetCurrentBsonType();
+            if (bsonType == BsonType.String)
+            {
+                var dateAsString = context.Reader.ReadString();
+                if (DateTime.TryParse(dateAsString, out var date))
+                {
+                    return date;
+                }
+                throw new FormatException($"String '{dateAsString}' was not recognized as a valid DateTime.");
+            }
+            return base.Deserialize(context, args);
+        }
+    }
     public enum BillStatus
     {
         Pending = 1,
@@ -15,45 +34,55 @@ namespace Cakee.Models
         [BsonId]
         [BsonRequired]
         public ObjectId Id { get; set; }
+
         [BsonRequired]
-        [BsonElement("BillFullName")]
-        public string BillFullName { get; set; }
+        [BsonElement("BillAcessoriesId")]
+        public ObjectId BillAcessoriesId { get; set; }
+
         [BsonRequired]
-        [BsonElement("BillName")]
-        public string BillName { get; set; }
-        [BsonRequired]
-        [BsonElement("BillPhone")]
-        public string BillPhone { get; set; }
-        [BsonRequired]
-        [BsonElement("BillAddress")]
-        public string BillAddress { get; set; }
+        [BsonElement("BillDeliveryAddress")]
+        public string? BillDeliveryAddress { get; set; }
+
+
         [BsonRequired]
         [BsonElement("BillDeliveryDate")]
-        public string BillDeliveryDate { get; set; }
-        [BsonRequired]
-        [BsonElement("BillReceiveDate")]
-        public string BillReceiveDate { get; set; }
+        public DateTime BillDeliveryDate { get; set; }
+
         [BsonRequired]
         [BsonElement("BillDeposit")]
-        public string BillDeposit { get; set; }
+        public Decimal BillDeposit { get; set; }
+
         [BsonRequired]
-        [BsonElement("BillTotal")]
-        public string BillTotal { get; set; }
+        [BsonElement("BillNote")]
+        public string? BillNote { get; set; }
+
+        [BsonRequired]
+        [BsonElement("BillReceiveDate")]
+        public DateTime BillReceiveDate { get; set; }
+
         [BsonRequired]
         [BsonElement("BillStatus")]
         public BillStatus BillStatus { get; set; } = BillStatus.Pending;
+
         [BsonRequired]
-        [BsonElement("BillNote")]
-        public string BillNote { get; set; }
+        [BsonElement("BillTotal")]
+        public Decimal BillTotal { get; set; }
+
         [BsonRequired]
-        [BsonElement("BillContent")]
-        public string BillContent { get; set; }
-        [BsonId]
+        [BsonElement("BillUserId")]
+        public ObjectId BillUserId { get; set; }
+
         [BsonRequired]
-        public ObjectId UserId { get; set; }
-        [BsonId]
+        [BsonElement("BillCakeContent")]
+        public string? BillCakeContent { get; set; }
+
         [BsonRequired]
-        public List<ObjectId> CakeIds { get; set; }
+        [BsonElement("BillCakeId")]
+        public ObjectId BillCakeId { get; set; }
+
+        [BsonRequired]
+        [BsonElement("BillCakeQuantity")]
+        public int BillCakeQuantity { get; set; }
 
     }
 }
