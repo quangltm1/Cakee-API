@@ -1,20 +1,20 @@
 ﻿using Cakee.Models;
 using Cakee.Services.IService;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Cakee.Services.Service
-{
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly IMongoCollection<Cart> _cartCollection;
 
-        public ShoppingCartService(IMongoDatabase database)
-        {
-            _cartCollection = database.GetCollection<Cart>("Carts");
-        }
+        public ShoppingCartService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
+    {
+        var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
+        _cartCollection = database.GetCollection<Cart>(dbSettings.Value.CartsCollectionName);
+    }
 
-        public async Task<Cart> GetCartByUserIdAsync(string userId)
+    public async Task<Cart> GetCartByUserIdAsync(string userId)
         {
             var cart = await _cartCollection.Find(c => c.UserId.ToString() == userId).FirstOrDefaultAsync();
             if (cart == null)
@@ -81,4 +81,3 @@ namespace Cakee.Services.Service
             return cart;
         }
     }
-}

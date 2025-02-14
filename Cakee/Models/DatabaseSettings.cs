@@ -13,5 +13,7 @@
         public string? AcessorysCollectionName { get; set; }
         public string? ShoppingCartsCollectionName { get; set; }
         public string? StatisticalsCollectionName { get; set; }
+        public string? CartItemsCollectionName { get; set; }
+        public string? CartsCollectionName { get; set; }
     }
 }
