@@ -29,35 +29,43 @@ using MongoDB.Driver;
             return cart;
         }
 
-        public async Task<Cart> AddToCartAsync(string userId, CartItem item)
+    public async Task<Cart> AddToCartAsync(string userId, CartItem item)
+    {
+        var cart = await GetCartByUserIdAsync(userId);
+        var existingItem = cart.Items.FirstOrDefault(i => i.CakeId == item.CakeId && i.Acessory == item.Acessory);
+
+        if (existingItem != null)
         {
-            var cart = await GetCartByUserIdAsync(userId);
-            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId && i.ProductType == item.ProductType);
-
-            if (existingItem != null)
-            {
-                existingItem.Quantity += item.Quantity;
-            }
-            else
-            {
-                cart.Items.Add(item);
-            }
-
-            cart.TotalPrice = cart.Items.Sum(i => i.Quantity * i.Price);
-            await _cartCollection.ReplaceOneAsync(c => c.UserId.ToString() == userId, cart, new ReplaceOptions { IsUpsert = true });
-
-            return cart;
+            existingItem.QuantityCake += item.QuantityCake;
+            existingItem.QuantityAccessory += item.QuantityAccessory;
+            existingItem.Total += item.Total;
+        }
+        else
+        {
+            cart.Items.Add(item);
         }
 
-        public async Task<bool> RemoveFromCartAsync(string userId, string productId)
-        {
-            var cart = await GetCartByUserIdAsync(userId);
-            cart.Items.RemoveAll(i => i.ProductId.ToString() == productId);
-            cart.TotalPrice = cart.Items.Sum(i => i.Quantity * i.Price);
-            await _cartCollection.ReplaceOneAsync(c => c.UserId.ToString() == userId, cart);
+        cart.TotalPrice = cart.Items.Sum(i => i.Total);
+        await _cartCollection.ReplaceOneAsync(c => c.UserId.ToString() == userId, cart);
 
+        return cart;
+    }
+
+    public async Task<bool> RemoveFromCartAsync(string userId, string productId)
+    {
+        var cart = await GetCartByUserIdAsync(userId);
+        var itemToRemove = cart.Items.FirstOrDefault(i => i.CakeId.ToString() == productId || i.Acessory.ToString() == productId);
+
+        if (itemToRemove != null)
+        {
+            cart.Items.Remove(itemToRemove);
+            cart.TotalPrice = cart.Items.Sum(i => i.Total);
+            await _cartCollection.ReplaceOneAsync(c => c.UserId.ToString() == userId, cart);
             return true;
         }
+
+        return false;
+    }
 
         public async Task<bool> ClearCartAsync(string userId)
         {
@@ -65,19 +73,25 @@ using MongoDB.Driver;
             return true;
         }
 
-        public async Task<Cart> UpdateCartItemAsync(string userId, CartItem item)
+    public async Task<Cart> UpdateCartItemAsync(string userId, CartItem item)
+    {
+        var cart = await GetCartByUserIdAsync(userId);
+        var existingItem = cart.Items.FirstOrDefault(i => i.CakeId == item.CakeId && i.Acessory == item.Acessory);
+
+        if (existingItem != null)
         {
-            var cart = await GetCartByUserIdAsync(userId);
-            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId && i.ProductType == item.ProductType);
-
-            if (existingItem != null)
-            {
-                existingItem.Quantity = item.Quantity;
-            }
-
-            cart.TotalPrice = cart.Items.Sum(i => i.Quantity * i.Price);
-            await _cartCollection.ReplaceOneAsync(c => c.UserId.ToString() == userId, cart);
-
-            return cart;
+            existingItem.QuantityCake = item.QuantityCake;
+            existingItem.QuantityAccessory = item.QuantityAccessory;
+            existingItem.Total = item.Total;
         }
+        else
+        {
+            cart.Items.Add(item);
+        }
+
+        cart.TotalPrice = cart.Items.Sum(i => i.Total);
+        await _cartCollection.ReplaceOneAsync(c => c.UserId.ToString() == userId, cart);
+
+        return cart;
     }
+}

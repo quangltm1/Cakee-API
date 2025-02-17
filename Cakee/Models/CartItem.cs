@@ -5,12 +5,18 @@ namespace Cakee.Models
 {
     public class CartItem
     {
-        [BsonElement("ProductId")]
-        public ObjectId ProductId { get; set; }
+        [BsonRequired]
+        [BsonElement("CakeId")]
+        public ObjectId CakeId { get; set; }
 
-
-        public string ProductType { get; set; } // "Cake" hoặc "Accessory"
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        [BsonElement("Acessory")]
+        public ObjectId Acessory { get; set; }
+        [BsonRequired]
+        [BsonElement("QuantityCake")]
+        public int QuantityCake { get; set; }
+        [BsonElement("QuantityAccessory")]
+        public int QuantityAccessory { get; set; }
+        [BsonElement("Total")]
+        public decimal Total { get; set; }
     }
 }
