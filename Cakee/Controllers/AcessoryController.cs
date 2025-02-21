@@ -93,10 +93,11 @@ namespace Cakee.Controllers
         [HttpPatch("Update Acessory")]
         public async Task<ActionResult> UpdateAcessory(string id, Acessory acessory)
         {
-            var existingAcessory = await _acessoryService.GetByIdAsync(id);
-            if (existingAcessory == null)
+            // Check if the acessory name exists
+            var existingAcessory = await _acessoryService.GetByNameAsync(acessory.AcessoryName);
+            if (existingAcessory != null && existingAcessory.Id != acessory.Id)
             {
-                return NotFound("Acessory not found");
+                return BadRequest("Acessory name already exists");
             }
             await _acessoryService.UpdateAsync(id, acessory);
             return Ok(acessory);

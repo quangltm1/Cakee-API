@@ -21,7 +21,7 @@ namespace Cakee.Controllers
         }
 
         // GET: api/<CakeController>
-        [HttpGet("Get All Cake")]
+        [HttpGet("Get_All_Cake")]
         [AllowAnonymous] // Cho phép truy cập không cần xác thực
         public async Task<ActionResult<List<object>>> GetCake()
         {
@@ -131,10 +131,10 @@ namespace Cakee.Controllers
         public async Task<ActionResult> Patch(string id, [FromBody] Cake updatedCake)
         {
             // Check if the cake exists
-            var existingCake = await _cakeService.GetByIdAsync(id);
-            if (existingCake == null)
+            var existingCake = await _cakeService.GetByNameAsync(updatedCake.CakeName);
+            if (existingCake != null)
             {
-                return NotFound("Cake not found");
+                return BadRequest(new { message = "Cake name already exists." });
             }
             // Update the specific fields
             if (updatedCake.CakeName != null)

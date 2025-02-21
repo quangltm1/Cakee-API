@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using Cakee.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cakee.Controllers
 {
@@ -265,6 +266,28 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
+        //get current user
+        [Authorize] // Chỉ cho phép user có token hợp lệ truy cập
+        [HttpGet("current")]
+        public IActionResult GetCurrentUser()
+        {
+            var user = HttpContext.Items["User"] as User;
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid Token" });
+            }
+
+            return Ok(new
+            {
+                Id = user.Id.ToString(),
+                UserName = user.UserName,
+                FullName = user.FullName,
+                Phone = user.Phone,
+                Role = user.Role,
+                CreatedAt = user.CreatedAt
+            });
+        }
+
         [HttpGet("Get User By Role")]
         public async Task<ActionResult> GetUserByRole(int role)
         {
@@ -287,6 +310,20 @@ namespace Cakee.Controllers
                 return BadRequest(new { Message = "User data is invalid" });
             }
 
+            // Check if username already exists
+            var existingUserByUsername = await _userService.GetUserByUserNameAsync(userDto.UserName);
+            if (existingUserByUsername != null)
+            {
+                return BadRequest(new { Message = "Username already exists" });
+            }
+
+            // Check if phone already exists
+            var existingUsers = await _userService.GetAllAsync();
+            if (existingUsers.Any(u => u.Phone == userDto.Phone))
+            {
+                return BadRequest(new { Message = "Phone number already exists" });
+            }
+
             var user = new User
             {
                 UserName = userDto.UserName,
@@ -307,6 +344,20 @@ namespace Cakee.Controllers
             if (userDto == null)
             {
                 return BadRequest(new { Message = "User data is invalid" });
+            }
+
+            // Check if username already exists
+            var existingUserByUsername = await _userService.GetUserByUserNameAsync(userDto.UserName);
+            if (existingUserByUsername != null)
+            {
+                return BadRequest(new { Message = "Username already exists" });
+            }
+
+            // Check if phone already exists
+            var existingUsers = await _userService.GetAllAsync();
+            if (existingUsers.Any(u => u.Phone == userDto.Phone))
+            {
+                return BadRequest(new { Message = "Phone number already exists" });
             }
 
             var user = new User
@@ -356,15 +407,21 @@ namespace Cakee.Controllers
                 return NotFound(new { Message = $"User with ID {id} not found" });
             }
 
+            // Check if phone already exists
+            if (!string.IsNullOrEmpty(patchRequest.Phone))
+            {
+                var existingUsers = await _userService.GetAllAsync();
+                if (existingUsers.Any(u => u.Phone == patchRequest.Phone && u.Id != existingUser.Id))
+                {
+                    return BadRequest(new { Message = "Phone number already exists" });
+                }
+                existingUser.Phone = patchRequest.Phone;
+            }
+
             // Update the specific fields
             if (!string.IsNullOrEmpty(patchRequest.Password))
             {
                 existingUser.PassWord = patchRequest.Password; // Không băm mật khẩu
-            }
-
-            if (!string.IsNullOrEmpty(patchRequest.Phone))
-            {
-                existingUser.Phone = patchRequest.Phone;
             }
 
             if (!string.IsNullOrEmpty(patchRequest.FullName))

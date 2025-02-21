@@ -1,4 +1,4 @@
-@Cakee_HostAddress = http://localhost:5043
+@Cakee_HostAddress = http://localhost:5001
 
 GET {{Cakee_HostAddress}}/api/User/GetAllUsers
 Accept: application/json

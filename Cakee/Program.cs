@@ -10,27 +10,35 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Cakee.Services.Service;
-using Cakee.Services.IService; // Added missing using directive
+using Cakee.Services.IService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowNgrok",
+        builder =>
+        {
+            builder.WithOrigins("https://lobster-tops-pegasus.ngrok-free.app")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 // MongoDb Connection
-builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("MyDb")
-);
-builder.Services.AddSingleton<DatabaseSettings>(sp =>
-    sp.GetRequiredService<IOptions<DatabaseSettings>>().Value
-);
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("MyDb"));
+builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 builder.Services.AddSingleton<MongoClient>(sp =>
     new MongoClient(builder.Configuration.GetValue<string>("MyDb:ConnectionString"))
 );
-builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSettings")); // Fixed Configuration reference
+builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSettings"));
 
 // Configure JWT Authentication
-var secretKey = builder.Configuration["AppSettings:SecretKey"];
+var secretKey = builder.Configuration["AppSettings:SecretKey"]
+                ?? throw new ArgumentNullException("SecretKey không được để trống!");
 var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -40,7 +48,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnChallenge = context =>
             {
-                context.Response.Headers["WWW-Authenticate"] = context.Response.Headers["WWW-Authenticate"].ToString().Replace("Bearer ", "");
+                context.Response.Headers["WWW-Authenticate"] =
+                    context.Response.Headers["WWW-Authenticate"].ToString().Replace("Bearer ", "");
                 return Task.CompletedTask;
             }
         };
@@ -54,18 +63,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cakee", Version = "v1" });
+    c.SchemaFilter<CakeSchemaFilter>();
+    c.SchemaFilter<CategorySchemaFilter>();
+    c.SchemaFilter<UserSchemaFilter>();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"{token}\"",
+        Description = "Nhập token vào đây (không cần 'Bearer ' prefix)",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer"
     });
+
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -80,11 +94,7 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
-    c.SchemaFilter<UserSchemaFilter>();
-    c.SchemaFilter<CakeSchemaFilter>();
-    c.SchemaFilter<CategorySchemaFilter>();
 });
-
 
 // Resolving the dependencies
 builder.Services.AddTransient<ICategoryService, CategoryService>();
@@ -104,18 +114,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
-app.UseRouting();
+app.UseCors("AllowNgrok");
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=User}/{action=Index}/{id?}");
-});
-
+app.MapControllers();
 
 app.Run();

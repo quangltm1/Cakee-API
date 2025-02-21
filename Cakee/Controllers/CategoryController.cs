@@ -66,6 +66,13 @@ namespace Cakee.Controllers
         [HttpPost("Create Category")]
         public async Task<ActionResult<Category>> Post([FromBody] Category category)
         {
+            // Check if the category name already exists
+            var existingCategory = await _categoryService.GetByNameAsync(category.CategoryName);
+            if (existingCategory != null)
+            {
+                return BadRequest(new { message = "Category name already exists." });
+            }
+
             var createdCategory = await _categoryService.CreateAsync(category);
             return CreatedAtAction("GetCategoryById", new { id = createdCategory.Id }, createdCategory);
         }
