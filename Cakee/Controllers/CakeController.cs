@@ -22,11 +22,11 @@ namespace Cakee.Controllers
 
         // GET: api/<CakeController>
         [HttpGet("Get_All_Cake")]
-        [AllowAnonymous] // Cho phép truy cập không cần xác thực
+        [AllowAnonymous]
         public async Task<ActionResult<List<object>>> GetCake()
         {
             var cakes = await _cakeService.GetAllAsync();
-            var response = new List<object>(); // This will hold the formatted response
+            var response = new List<object>();
 
             if (cakes == null)
             {
@@ -38,19 +38,21 @@ namespace Cakee.Controllers
                 var category = await _cate.GetByIdAsync(cake.CakeCategoryId.ToString());
                 response.Add(new
                 {
-                    Id = cake.Id.ToString(),
+                    Id = cake.Id.ToString(), // ✅ Chuyển ObjectId sang string
                     CakeName = cake.CakeName,
-                    CakeCategoryName = category?.CategoryName, // Display category name
+                    CakeCategoryId = cake.CakeCategoryId.ToString(), // ✅ Chuyển ObjectId sang string
                     CakeSize = cake.CakeSize,
                     CakeDescription = cake.CakeDescription,
                     CakePrice = cake.CakePrice,
                     CakeImage = cake.CakeImage,
                     CakeRating = cake.CakeRating,
                     CakeQuantity = cake.CakeQuantity,
+                    UserId = cake.UserId.ToString() // ✅ Chuyển ObjectId sang string
                 });
             }
             return Ok(response);
         }
+
 
         [HttpGet("Get Category Of Cake")]
         [AllowAnonymous] // Cho phép truy cập không cần xác thực
@@ -77,7 +79,7 @@ namespace Cakee.Controllers
             var category = await _cate.GetByIdAsync(cake.CakeCategoryId.ToString());
             var response = new
             {
-                //Id = cake.Id.ToString(),  // Convert ObjectId to string
+                Id = cake.Id.ToString(),  // Convert ObjectId to string
                 CakeName = cake.CakeName,
                 CakeSize = cake.CakeSize,
                 CakePrice = cake.CakePrice,
@@ -103,7 +105,22 @@ namespace Cakee.Controllers
             {
                 return NotFound(new { Message = "No cakes found for this store" });
             }
-            return Ok(cakes);
+
+            var response = cakes.Select(cake => new
+            {
+                Id = cake.Id.ToString(),  // ✅ Chuyển ObjectId sang string
+                CakeName = cake.CakeName,
+                CakeSize = cake.CakeSize,
+                CakeDescription = cake.CakeDescription,
+                CakePrice = cake.CakePrice,
+                CakeImage = cake.CakeImage,
+                CakeRating = cake.CakeRating,
+                CakeQuantity = cake.CakeQuantity,
+                CakeCategoryId = cake.CakeCategoryId.ToString(), // ✅ Chuyển ObjectId sang string
+                UserId = cake.UserId.ToString(), // ✅ Chuyển ObjectId sang string
+            });
+
+            return Ok(response);
         }
 
 
