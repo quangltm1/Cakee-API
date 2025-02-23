@@ -266,6 +266,7 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpGet("current")]
         public IActionResult GetCurrentUser()
         {

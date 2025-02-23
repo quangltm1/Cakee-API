@@ -25,9 +25,10 @@ public class JwtMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", "").Trim();
+        var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+        var token = authHeader?.Split(' ').LastOrDefault(); // Lấy phần cuối cùng của chuỗi
 
-        Console.WriteLine($"🟢 Token nhận được từ client: {token}"); // Debug token
+        Console.WriteLine($"🟢 Token nhận được: {token}");
 
         if (!string.IsNullOrEmpty(token))
         {
@@ -36,7 +37,6 @@ public class JwtMiddleware
 
         await _next(context);
     }
-
 
     private async Task AttachUserToContext(HttpContext context, string token)
     {
@@ -57,9 +57,17 @@ public class JwtMiddleware
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = jwtToken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            Console.WriteLine($"✅ Token hợp lệ! UserID: {userId}");
+            // Debug: In toàn bộ claims từ token
+            Console.WriteLine("🔍 Claims từ token:");
+            foreach (var claim in jwtToken.Claims)
+            {
+                Console.WriteLine($"👉 {claim.Type}: {claim.Value}");
+            }
+
+            // Lấy userId từ các key phổ biến trong JWT
+            var userId = jwtToken.Claims.FirstOrDefault(x =>
+                x.Type == "nameid" || x.Type == "id" || x.Type == "sub")?.Value;
 
             if (string.IsNullOrEmpty(userId))
             {
@@ -67,33 +75,26 @@ public class JwtMiddleware
                 return;
             }
 
-            // Kiểm tra nếu ObjectId hợp lệ trước khi query MongoDB
+            // Chuyển userId về ObjectId để truy vấn MongoDB
             if (!ObjectId.TryParse(userId, out ObjectId objectId))
             {
-                Console.WriteLine("❌ userId không hợp lệ!");
+                Console.WriteLine($"❌ userId '{userId}' không phải ObjectId hợp lệ!");
                 return;
             }
 
-            // Lấy thông tin user từ MongoDB
             var user = await _usersCollection.Find(u => u.Id == objectId).FirstOrDefaultAsync();
-            if (user != null)
+            if (user == null)
             {
-                Console.WriteLine($"✅ Tìm thấy user: {user.UserName} trong database!");
-                context.Items["User"] = user; // Gán user vào HttpContext.Items
+                Console.WriteLine($"❌ Không tìm thấy user với ObjectId: {objectId}");
+                return;
             }
-            else
-            {
-                Console.WriteLine("❌ Không tìm thấy user trong database!");
-            }
+
+            Console.WriteLine($"✅ User xác thực thành công: {user.UserName}");
+            context.Items["User"] = user;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"❌ Lỗi xác thực token: {ex.Message}");
         }
     }
-
-
-
-
-
 }

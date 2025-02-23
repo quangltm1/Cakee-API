@@ -57,9 +57,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             OnMessageReceived = context =>
             {
                 var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
-                if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+                if (!string.IsNullOrEmpty(authHeader))
                 {
-                    context.Token = authHeader.Replace("Bearer ", "").Trim();
+                    var tokenParts = authHeader.Split(' ');
+                    context.Token = tokenParts.LastOrDefault(); // Lấy phần cuối cùng
                 }
                 return Task.CompletedTask;
             },
@@ -99,7 +100,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
-        Scheme = "Bearer" // Quan trọng: Phải giữ nguyên "Bearer"
+        Scheme = "Bearer"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
