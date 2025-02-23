@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cakee.Models;
 using MongoDB.Bson;
+using System.Security.Claims;
 
 public class JwtMiddleware
 {
@@ -19,26 +20,34 @@ public class JwtMiddleware
     {
         _next = next;
         _configuration = configuration;
-        _usersCollection = database.GetCollection<User>("Users");
+        _usersCollection = database.GetCollection<User>("User");
     }
 
     public async Task Invoke(HttpContext context)
     {
-        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-        if (token != null)
+        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", "").Trim();
+
+        Console.WriteLine($"🟢 Token nhận được từ client: {token}"); // Debug token
+
+        if (!string.IsNullOrEmpty(token))
         {
             await AttachUserToContext(context, token);
         }
+
         await _next(context);
     }
+
 
     private async Task AttachUserToContext(HttpContext context, string token)
     {
         try
         {
+            Console.WriteLine("🟢 Bắt đầu xác thực token...");
+
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
-            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            var key = Encoding.ASCII.GetBytes(_configuration["AppSettings:SecretKey"]);
+
+            var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -48,18 +57,43 @@ public class JwtMiddleware
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = jwtToken.Claims.First(x => x.Type == "id").Value;
+            var userId = jwtToken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            Console.WriteLine($"✅ Token hợp lệ! UserID: {userId}");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                Console.WriteLine("❌ Không tìm thấy userId trong token!");
+                return;
+            }
+
+            // Kiểm tra nếu ObjectId hợp lệ trước khi query MongoDB
+            if (!ObjectId.TryParse(userId, out ObjectId objectId))
+            {
+                Console.WriteLine("❌ userId không hợp lệ!");
+                return;
+            }
 
             // Lấy thông tin user từ MongoDB
-            var user = await _usersCollection.Find(u => u.Id == ObjectId.Parse(userId)).FirstOrDefaultAsync();
+            var user = await _usersCollection.Find(u => u.Id == objectId).FirstOrDefaultAsync();
             if (user != null)
             {
-                context.Items["User"] = user;
+                Console.WriteLine($"✅ Tìm thấy user: {user.UserName} trong database!");
+                context.Items["User"] = user; // Gán user vào HttpContext.Items
+            }
+            else
+            {
+                Console.WriteLine("❌ Không tìm thấy user trong database!");
             }
         }
-        catch
+        catch (Exception ex)
         {
-            //tra loi Token không hợp lệ
+            Console.WriteLine($"❌ Lỗi xác thực token: {ex.Message}");
         }
     }
+
+
+
+
+
 }

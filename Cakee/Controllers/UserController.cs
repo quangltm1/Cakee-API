@@ -266,17 +266,22 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
-        //get current user
-        [Authorize] // Chỉ cho phép user có token hợp lệ truy cập
         [HttpGet("current")]
         public IActionResult GetCurrentUser()
         {
+            Console.WriteLine("🟢 Đang lấy user từ HttpContext.Items...");
+
+            var token = Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", "").Trim();
+            Console.WriteLine($"🔍 Token nhận được trong API: {token}");
+
             var user = HttpContext.Items["User"] as User;
             if (user == null)
             {
+                Console.WriteLine("❌ Không tìm thấy user trong HttpContext.Items");
                 return Unauthorized(new { message = "Invalid Token" });
             }
 
+            Console.WriteLine("✅ Trả về thông tin user!");
             return Ok(new
             {
                 Id = user.Id.ToString(),
@@ -287,6 +292,7 @@ namespace Cakee.Controllers
                 CreatedAt = user.CreatedAt
             });
         }
+
 
         [HttpGet("Get User By Role")]
         public async Task<ActionResult> GetUserByRole(int role)

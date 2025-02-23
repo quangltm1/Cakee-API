@@ -29,12 +29,20 @@ builder.Services.AddCors(options =>
 });
 
 // MongoDb Connection
+// MongoDb Connection
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("MyDb"));
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 builder.Services.AddSingleton<MongoClient>(sp =>
     new MongoClient(builder.Configuration.GetValue<string>("MyDb:ConnectionString"))
 );
+builder.Services.AddSingleton<IMongoDatabase>(sp =>
+{
+    var client = sp.GetRequiredService<MongoClient>();
+    var databaseSettings = sp.GetRequiredService<DatabaseSettings>();
+    return client.GetDatabase(databaseSettings.DatabaseName);
+});
 builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSettings"));
+
 
 // Configure JWT Authentication
 var secretKey = builder.Configuration["AppSettings:SecretKey"]
@@ -46,6 +54,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         opt.Events = new JwtBearerEvents
         {
+            OnMessageReceived = context =>
+            {
+                var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+                {
+                    context.Token = authHeader.Replace("Bearer ", "").Trim();
+                }
+                return Task.CompletedTask;
+            },
             OnChallenge = context =>
             {
                 context.Response.Headers["WWW-Authenticate"] =
@@ -55,13 +72,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
         opt.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,
-            ValidateAudience = false,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidIssuer = "yourIssuer",
+            ValidAudience = "yourAudience",
             ClockSkew = TimeSpan.Zero
         };
     });
+
+
+
 
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -73,27 +95,27 @@ builder.Services.AddSwaggerGen(c =>
     c.SchemaFilter<UserSchemaFilter>();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "Nhập token vào đây (không cần 'Bearer ' prefix)",
+        Description = "Nhập token vào đây theo định dạng: Bearer {token}",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
-        Scheme = "Bearer"
+        Scheme = "Bearer" // Quan trọng: Phải giữ nguyên "Bearer"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
     {
+        new OpenApiSecurityScheme
         {
-            new OpenApiSecurityScheme
+            Reference = new OpenApiReference
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new List<string>()
-        }
-    });
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer" // Quan trọng: Phải khớp với định nghĩa trên
+            }
+        },
+        new List<string>()
+    }
+});
 });
 
 // Resolving the dependencies
@@ -116,8 +138,12 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("AllowNgrok");
 
+// Đăng ký middleware JWT
+app.UseMiddleware<JwtMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
