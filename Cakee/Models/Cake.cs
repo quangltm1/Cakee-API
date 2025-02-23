@@ -36,4 +36,8 @@ public class Cake
     [BsonElement("CakeQuantity")]
     public int CakeQuantity { get; set; } =0;
 
+    [BsonRequired]
+    [BsonElement("UserId")]
+    public ObjectId UserId { get; set; }
+
 }

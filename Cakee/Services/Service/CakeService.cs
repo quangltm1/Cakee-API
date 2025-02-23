@@ -76,5 +76,13 @@ namespace Cakee.Services.Service
             cake.Id = new ObjectId(id);
             await _cakeCollection.ReplaceOneAsync(c => c.Id == cake.Id, cake);
         }
+
+        public async Task<List<Cake>> GetCakesByUserIdAsync(string storeId)
+        {
+            var objectId = ObjectId.Parse(storeId); // Chuyển đổi storeId từ string sang ObjectId
+            return await _cakeCollection.Find(c => c.UserId == objectId).ToListAsync();
+        }
+
+
     }
 }

@@ -39,27 +39,39 @@ namespace Cakee.Controllers
             var user = await _userService.GetUserByUserNameAsync(loginRequest.UserName);
             if (user == null)
             {
-                Console.WriteLine("User not found");
+                Console.WriteLine("❌ User không tồn tại.");
                 return Unauthorized(new { Message = "Username hoặc password không hợp lệ" });
             }
 
-            // Bỏ qua kiểm tra băm mật khẩu
+            // Check mật khẩu (nếu bạn đã hash password thì phải kiểm tra hash)
             if (loginRequest.PassWord != user.PassWord)
             {
-                Console.WriteLine("Password verification failed");
+                Console.WriteLine("❌ Sai mật khẩu.");
                 return Unauthorized(new { Message = "Username hoặc password không hợp lệ" });
             }
 
-            // Kiểm tra vai trò của người dùng (0 - user, 1 - admin)
+            // Kiểm tra role
             if (user.Role != 0 && user.Role != 1)
             {
+                Console.WriteLine("❌ Role không hợp lệ: " + user.Role);
                 return Unauthorized(new { Message = "Vai trò không hợp lệ" });
             }
 
-            // Tạo mã token (JWT)
+            // Tạo token JWT
             var token = await GenerateJwtToken(user);
-            return Ok(new { Token = token, Role = user.Role });
+
+            // Debug token & role
+            Console.WriteLine($"✅ Đăng nhập thành công! User: {user.UserName} | Role: {user.Role} | Token: {token.AccessToken}");
+
+            // Trả về token & role chính xác
+            return Ok(new
+            {
+                token = token.AccessToken,
+                role = user.Role  // Nếu role null, mặc định là 0
+            });
         }
+
+
 
         private async Task<Token> GenerateJwtToken(User user)
         {
@@ -308,27 +320,18 @@ namespace Cakee.Controllers
             return Ok(users);
         }
 
-        // CREATE a new user
         [HttpPost("Create User")]
-        public async Task<ActionResult> CreateUser([FromBody] User userDto)
+        public async Task<IActionResult> CreateUser([FromBody] User userDto)
         {
             if (userDto == null)
             {
                 return BadRequest(new { Message = "User data is invalid" });
             }
 
-            // Check if username already exists
             var existingUserByUsername = await _userService.GetUserByUserNameAsync(userDto.UserName);
             if (existingUserByUsername != null)
             {
                 return BadRequest(new { Message = "Username already exists" });
-            }
-
-            // Check if phone already exists
-            var existingUsers = await _userService.GetAllAsync();
-            if (existingUsers.Any(u => u.Phone == userDto.Phone))
-            {
-                return BadRequest(new { Message = "Phone number already exists" });
             }
 
             var user = new User
@@ -341,43 +344,34 @@ namespace Cakee.Controllers
             };
 
             var createdUser = await _userService.CreateUserAsync(user);
-            return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
+            return Ok(new { Message = "User created successfully", Id = createdUser.Id }); // Trả về 200 thay vì 201
         }
 
-        // Create a new admin
         [HttpPost("Create Admin")]
-        public async Task<ActionResult> CreateAdmin([FromBody] User userDto)
+        public async Task<IActionResult> CreateAdmin([FromBody] User userDto)
         {
             if (userDto == null)
             {
                 return BadRequest(new { Message = "User data is invalid" });
             }
 
-            // Check if username already exists
             var existingUserByUsername = await _userService.GetUserByUserNameAsync(userDto.UserName);
             if (existingUserByUsername != null)
             {
                 return BadRequest(new { Message = "Username already exists" });
             }
 
-            // Check if phone already exists
-            var existingUsers = await _userService.GetAllAsync();
-            if (existingUsers.Any(u => u.Phone == userDto.Phone))
-            {
-                return BadRequest(new { Message = "Phone number already exists" });
-            }
-
             var user = new User
             {
                 UserName = userDto.UserName,
-                PassWord = userDto.PassWord, // Không băm mật khẩu
+                PassWord = userDto.PassWord,
                 FullName = userDto.FullName,
                 Phone = userDto.Phone,
                 Role = 1 // Admin
             };
 
             var createdUser = await _userService.CreateAdminAsync(user);
-            return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
+            return Ok(new { Message = "Admin created successfully", Id = createdUser.Id }); // Trả về 200 thay vì 201
         }
 
         // UPDATE an existing user

@@ -89,6 +89,24 @@ namespace Cakee.Controllers
             return Ok(response); // Return the found cake
         }
 
+        [AllowAnonymous]
+        [HttpGet("GetByUserId")]
+        public async Task<IActionResult> GetCakesByStore([FromQuery] string userId)
+        {
+            if (!ObjectId.TryParse(userId, out ObjectId objectId))
+            {
+                return BadRequest(new { Message = "Invalid storeId format" });
+            }
+
+            var cakes = await _cakeService.GetCakesByUserIdAsync(userId);
+            if (cakes == null || cakes.Count == 0)
+            {
+                return NotFound(new { Message = "No cakes found for this store" });
+            }
+            return Ok(cakes);
+        }
+
+
         // POST api/<CakeController>
         [HttpPost("Create Cake")]
         public async Task<ActionResult<Cake>> Post([FromBody] Cake cake)
