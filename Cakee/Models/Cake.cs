@@ -41,3 +41,14 @@ public class Cake
     public ObjectId UserId { get; set; }
 
 }
+
+public class UpdateCakeRequest
+{
+    public string? CakeName { get; set; }
+    public decimal? CakePrice { get; set; }
+    public int? CakeSize { get; set; }
+    public string? CakeCategoryId { get; set; }  // Nhận dạng string để dễ xử lý
+    public string? CakeImage { get; set; }
+    public int? CakeQuantity { get; set; }
+}
+

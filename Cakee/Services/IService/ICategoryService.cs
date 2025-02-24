@@ -14,5 +14,6 @@ namespace Cakee.Services.IService
         Task DeleteAsync(string id);
         Task<Category> GetByNameAsync(string categoryName);
         Task<string> GetByNameByIdAsync(string id);
+        Task<List<Category>> GetCakesByUserIdAsync(string storeId);
     }
 }

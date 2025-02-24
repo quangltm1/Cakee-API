@@ -11,6 +11,9 @@ namespace Cakee.Models
         [BsonRequired]
         [BsonElement("CategoryName")]
         public string? CategoryName { get; set; }
+
+        [BsonElement("UserId")]
+        public ObjectId UserId { get; set; }
         
 
         

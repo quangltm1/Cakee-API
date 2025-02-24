@@ -20,20 +20,20 @@ namespace Cakee.Services.Service
 
         }
 
-        public async Task<Category> GetCategoryByCakeIdAsync(string cakeId)
+        public async Task<Category?> GetCategoryByCakeIdAsync(string cakeId)
         {
-            // Find the cake by Id
             var cake = await _cakeCollection.Find(c => c.Id.ToString() == cakeId).FirstOrDefaultAsync();
 
             if (cake != null)
             {
-                // Fetch the category by its Id (stored in CakeCategoryName)
                 var category = await _categoryCollection.Find(c => c.Id == cake.CakeCategoryId).FirstOrDefaultAsync();
-                return category;
+                return category ?? new Category { Id = ObjectId.Empty, CategoryName = "Không xác định" };
             }
 
-            return null; // Return null if the cake is not found
+            return null;
         }
+
+
 
 
         public async Task<Cake> CreateAsync(Cake cake)
@@ -72,10 +72,22 @@ namespace Cakee.Services.Service
 
         public async Task UpdateAsync(string id, Cake cake)
         {
-            //Ensure the cake has the correct Id
-            cake.Id = new ObjectId(id);
-            await _cakeCollection.ReplaceOneAsync(c => c.Id == cake.Id, cake);
+            var update = Builders<Cake>.Update
+                .Set(c => c.CakeName, cake.CakeName)
+                .Set(c => c.CakePrice, cake.CakePrice)
+                .Set(c => c.CakeSize, cake.CakeSize)
+                .Set(c => c.CakeImage, cake.CakeImage)
+                .Set(c => c.CakeQuantity, cake.CakeQuantity);
+
+            // Kiểm tra và cập nhật CakeCategoryId nếu khác null
+            if (cake.CakeCategoryId != ObjectId.Empty)
+            {
+                update = update.Set(c => c.CakeCategoryId, cake.CakeCategoryId);
+            }
+
+            await _cakeCollection.UpdateOneAsync(c => c.Id == ObjectId.Parse(id), update);
         }
+
 
         public async Task<List<Cake>> GetCakesByUserIdAsync(string storeId)
         {

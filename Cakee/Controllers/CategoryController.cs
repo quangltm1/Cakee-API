@@ -34,12 +34,15 @@ namespace Cakee.Controllers
                 response.Add(new
                 {
                     Id = category.Id.ToString(),  // Convert ObjectId to string
-                    CategoryName = category.CategoryName
+                    CategoryName = category.CategoryName,
+                    UserId = category.UserId.ToString()
                 });
             }
 
             return Ok(response);
         }
+
+        
 
         // GET api/<CategoryController>/5
         [HttpGet("Get Category By Id")]

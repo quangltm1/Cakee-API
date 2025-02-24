@@ -1,6 +1,7 @@
 ﻿using Cakee.Models;
 using Cakee.Services.IService;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 public class CategoryService : ICategoryService
@@ -60,5 +61,11 @@ public class CategoryService : ICategoryService
         return await _categoryCollection
             .Find(category => category.CategoryName == name)
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<List<Category>> GetCakesByUserIdAsync(string storeId)
+    {
+        var objectId = ObjectId.Parse(storeId); // Chuyển đổi storeId từ string sang ObjectId
+        return await _categoryCollection.Find(c => c.UserId == objectId).ToListAsync();
     }
 }
