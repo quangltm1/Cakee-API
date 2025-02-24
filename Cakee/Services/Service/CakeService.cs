@@ -74,6 +74,7 @@ namespace Cakee.Services.Service
         {
             var update = Builders<Cake>.Update
                 .Set(c => c.CakeName, cake.CakeName)
+                .Set(c => c.CakeDescription, cake.CakeDescription)
                 .Set(c => c.CakePrice, cake.CakePrice)
                 .Set(c => c.CakeSize, cake.CakeSize)
                 .Set(c => c.CakeImage, cake.CakeImage)

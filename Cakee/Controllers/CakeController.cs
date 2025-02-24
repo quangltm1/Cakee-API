@@ -189,6 +189,7 @@ namespace Cakee.Controllers
                 return NotFound(new { message = "Cake not found." });
 
             existingCake.CakeName = request.CakeName ?? existingCake.CakeName;
+            existingCake.CakeDescription = request.CakeDescription ?? existingCake.CakeDescription;
             existingCake.CakePrice = request.CakePrice ?? existingCake.CakePrice;
             existingCake.CakeImage = request.CakeImage ?? existingCake.CakeImage;
             existingCake.CakeQuantity = request.CakeQuantity ?? existingCake.CakeQuantity;
