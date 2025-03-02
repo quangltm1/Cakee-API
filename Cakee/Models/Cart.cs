@@ -10,8 +10,9 @@ namespace Cakee.Models
         public string Id { get; set; }
 
         [BsonRequired]
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("UserId")]
-        public ObjectId UserId { get; set; }
+        public String? UserId { get; set; }
 
         public List<CartItem> Items { get; set; } = new();
 

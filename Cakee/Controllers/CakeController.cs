@@ -36,8 +36,8 @@ namespace Cakee.Controllers
                 c.CakeImage,
                 c.CakeRating,
                 c.CakeQuantity,
-                CakeCategoryId = c.CakeCategoryId.ToString(),
-                UserId = c.UserId.ToString()
+                CakeCategoryId = c.CakeCategoryId,
+                UserId = c.UserId
             }));
         }
 
@@ -144,16 +144,26 @@ namespace Cakee.Controllers
         [HttpPost("Create Cake")]
         public async Task<ActionResult<Cake>> Post([FromBody] Cake cake)
         {
-            // Check if a cake with the same name already exists
+            if (cake == null)
+            {
+                return BadRequest(new { message = "Cake data is required." });
+            }
+
+            // Kiểm tra tên bánh đã tồn tại chưa
             var existingCake = await _cakeService.GetByNameAsync(cake.CakeName);
             if (existingCake != null)
             {
                 return BadRequest(new { message = "Cake name already exists." });
             }
 
+            // ✅ Không cần ObjectId.Parse()
             var createdCake = await _cakeService.CreateAsync(cake);
             return CreatedAtAction("GetCakeById", new { id = createdCake.Id }, createdCake);
         }
+
+
+
+
 
         //// PUT api/<CakeController>/5
         //[HttpPut("Update Cake")]
@@ -181,9 +191,6 @@ namespace Cakee.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> UpdateCake(string id, [FromBody] UpdateCakeRequest request)
         {
-            if (!ObjectId.TryParse(id, out ObjectId objectId))
-                return BadRequest(new { message = "Invalid Cake ID." });
-
             var existingCake = await _cakeService.GetByIdAsync(id);
             if (existingCake == null)
                 return NotFound(new { message = "Cake not found." });
@@ -194,15 +201,15 @@ namespace Cakee.Controllers
             existingCake.CakeImage = request.CakeImage ?? existingCake.CakeImage;
             existingCake.CakeQuantity = request.CakeQuantity ?? existingCake.CakeQuantity;
 
-            // Chuyển string => ObjectId nếu hợp lệ
-            if (!string.IsNullOrEmpty(request.CakeCategoryId) && ObjectId.TryParse(request.CakeCategoryId, out ObjectId categoryId))
+            if (!string.IsNullOrEmpty(request.CakeCategoryId))
             {
-                existingCake.CakeCategoryId = categoryId;
+                existingCake.CakeCategoryId = request.CakeCategoryId;  // ✅ Không cần chuyển đổi
             }
 
             await _cakeService.UpdateAsync(id, existingCake);
             return Ok(new { message = "Cake updated successfully." });
         }
+
 
 
 

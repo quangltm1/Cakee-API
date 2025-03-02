@@ -13,7 +13,8 @@ namespace Cakee.Models
         public string? CategoryName { get; set; }
 
         [BsonElement("UserId")]
-        public ObjectId UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public String? UserId { get; set; }
         
 
         

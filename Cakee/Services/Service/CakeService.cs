@@ -26,12 +26,14 @@ namespace Cakee.Services.Service
 
             if (cake != null)
             {
-                var category = await _categoryCollection.Find(c => c.Id == cake.CakeCategoryId).FirstOrDefaultAsync();
+                var categoryId = ObjectId.Parse(cake.CakeCategoryId);
+                var category = await _categoryCollection.Find(c => c.Id == categoryId).FirstOrDefaultAsync();
                 return category ?? new Category { Id = ObjectId.Empty, CategoryName = "Không xác định" };
             }
 
             return null;
         }
+
 
 
 
@@ -81,7 +83,7 @@ namespace Cakee.Services.Service
                 .Set(c => c.CakeQuantity, cake.CakeQuantity);
 
             // Kiểm tra và cập nhật CakeCategoryId nếu khác null
-            if (cake.CakeCategoryId != ObjectId.Empty)
+            if (!string.IsNullOrEmpty(cake.CakeCategoryId))
             {
                 update = update.Set(c => c.CakeCategoryId, cake.CakeCategoryId);
             }
@@ -90,11 +92,13 @@ namespace Cakee.Services.Service
         }
 
 
+
         public async Task<List<Cake>> GetCakesByUserIdAsync(string storeId)
         {
             var objectId = ObjectId.Parse(storeId); // Chuyển đổi storeId từ string sang ObjectId
-            return await _cakeCollection.Find(c => c.UserId == objectId).ToListAsync();
+            return await _cakeCollection.Find(c => c.UserId == objectId.ToString()).ToListAsync();
         }
+
 
 
     }

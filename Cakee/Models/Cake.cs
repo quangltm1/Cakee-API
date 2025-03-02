@@ -26,8 +26,9 @@ public class Cake
     public string? CakeImage { get; set; }
 
     [BsonRequired]
+    [BsonRepresentation(BsonType.ObjectId)]
     [BsonElement("CakeCategoryId")]
-    public ObjectId CakeCategoryId { get; set; }
+    public String? CakeCategoryId { get; set; }
 
     [BsonElement("CakeRating")]
     public double CakeRating { get; set; }
@@ -37,8 +38,9 @@ public class Cake
     public int CakeQuantity { get; set; } =0;
 
     [BsonRequired]
+    [BsonRepresentation(BsonType.ObjectId)]
     [BsonElement("UserId")]
-    public ObjectId UserId { get; set; }
+    public String? UserId { get; set; }
 
 }
 

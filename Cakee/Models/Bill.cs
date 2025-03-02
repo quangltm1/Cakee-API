@@ -36,8 +36,9 @@ namespace Cakee.Models
         public ObjectId Id { get; set; }
 
         [BsonRequired]
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("BillAcessoriesId")]
-        public ObjectId BillAcessoriesId { get; set; }
+        public String? BillAcessoriesId { get; set; }
 
         [BsonRequired]
         [BsonElement("BillDeliveryAddress")]
@@ -69,16 +70,18 @@ namespace Cakee.Models
         public Decimal BillTotal { get; set; }
 
         [BsonRequired]
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("BillUserId")]
-        public ObjectId BillUserId { get; set; }
+        public String? BillUserId { get; set; }
 
         [BsonRequired]
         [BsonElement("BillCakeContent")]
         public string? BillCakeContent { get; set; }
 
         [BsonRequired]
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("BillCakeId")]
-        public ObjectId BillCakeId { get; set; }
+        public String? BillCakeId { get; set; }
 
         [BsonRequired]
         [BsonElement("BillCakeQuantity")]
