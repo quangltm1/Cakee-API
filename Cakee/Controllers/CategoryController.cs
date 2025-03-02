@@ -35,7 +35,7 @@ namespace Cakee.Controllers
                 {
                     Id = category.Id.ToString(),  // Convert ObjectId to string
                     CategoryName = category.CategoryName,
-                    UserId = category.UserId.ToString()
+                    UserId = category.UserId
                 });
             }
 
@@ -153,6 +153,23 @@ namespace Cakee.Controllers
             }
 
             return Ok(new { CategoryName = categoryName }); // Return the category name
+        }
+
+        [HttpGet("GetCategoryByUserId")]
+        public async Task<IActionResult> GetCategoryByUserId(string userId)
+
+        {
+            var categories = await _categoryService.GetCategoriesByUserIdAsync(userId);
+            if (categories == null || categories.Count == 0)
+            {
+                return NotFound(new { message = "No categories found." });
+            }
+            return Ok(categories.Select(c => new
+            {
+                Id = c.Id.ToString(),
+                Name = c.CategoryName,
+                UserId = c.UserId
+            }));
         }
 
         // DELETE api/<CategoryController>/5

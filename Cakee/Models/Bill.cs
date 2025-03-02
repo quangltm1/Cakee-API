@@ -40,8 +40,8 @@ namespace Cakee.Models
         public String? BillCakeSizeId { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("BillAccessoryId")]
-        public String? BillAccessoryId { get; set; }
+        [BsonElement("BillAcessoriesId")]
+        public String? BillAcessoriesId { get; set; }
 
 
         [BsonRequired]
@@ -75,8 +75,12 @@ namespace Cakee.Models
 
         [BsonRequired]
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("BillUserId")]
-        public String? BillUserId { get; set; }
+        [BsonElement("BillCustomId")]
+        public String? BillCustomId { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("BillShopId")]
+        public String? BillShopId { get; set; }
 
         [BsonRequired]
         [BsonElement("BillCakeContent")]

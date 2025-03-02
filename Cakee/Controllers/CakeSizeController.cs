@@ -37,6 +37,7 @@ namespace Cakee.Controllers
                 {
                     Id = cakesize.Id.ToString(),
                     CakeSizeName = cakesize.SizeName,
+                    ShopId = cakesize.UserId
                 });
             }
             return Ok(response);
@@ -55,6 +56,7 @@ namespace Cakee.Controllers
             {
                 Id = cakesize.Id.ToString(),
                 CakeSizeName = cakesize.SizeName,
+                ShopId = cakesize.UserId
             };
             return Ok(response);
         }
@@ -77,7 +79,8 @@ namespace Cakee.Controllers
                 cakesize = new
                 {
                     Id = newCakeSize.Id.ToString(),
-                    CakeSizeName = newCakeSize.SizeName
+                    CakeSizeName = newCakeSize.SizeName,
+                    ShopId = cakesize.UserId
                 }
             });
         }
@@ -104,7 +107,8 @@ namespace Cakee.Controllers
                     cakesize = new
                     {
                         Id = existingCakeSize.Id.ToString(),
-                        CakeSizeName = existingCakeSize.SizeName
+                        CakeSizeName = existingCakeSize.SizeName,
+                        ShopId = existingCakeSize.UserId
                     }
                 });
         }

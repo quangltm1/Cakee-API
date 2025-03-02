@@ -9,6 +9,7 @@ namespace Cakee.Services.IService
     {
         Task<List<Category>> GetAllAsync();
         Task<Category> GetByIdAsync(string id);
+        Task<List<Category>> GetCategoriesByUserIdAsync(string userId);
         Task<Category> CreateAsync(Category category);
         Task UpdateAsync(string id, Category category);
         Task DeleteAsync(string id);

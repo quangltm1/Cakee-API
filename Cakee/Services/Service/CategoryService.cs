@@ -65,7 +65,13 @@ public class CategoryService : ICategoryService
 
     public async Task<List<Category>> GetCakesByUserIdAsync(string storeId)
     {
-        var objectId = ObjectId.Parse(storeId); // Chuyển đổi storeId từ string sang ObjectId
-        return await _categoryCollection.Find(c => c.UserId == objectId).ToListAsync();
+        var objectId = ObjectId.Parse(storeId); // Convert storeId from string to ObjectId
+        return await _categoryCollection.Find(c => c.UserId == objectId.ToString()).ToListAsync();
+    }
+
+    public async Task<List<Category>> GetCategoriesByUserIdAsync(string userId)
+    {
+        var objectId = ObjectId.Parse(userId); // Convert userId from string to ObjectId
+        return await _categoryCollection.Find(c => c.UserId == objectId.ToString()).ToListAsync();
     }
 }

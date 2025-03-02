@@ -34,13 +34,13 @@ namespace Cakee.Controllers
             }
             foreach (var bill in bills)
             {
-                var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
+                var user = await _userService.GetByIdAsync(bill.BillCustomId.ToString());
                 var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
-                var acessory = await _acessoryService.GetByIdAsync(bill.BillAccessoryId);
+                var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId);
                 response.Add(new
                 {
                     Id = bill.Id.ToString(),
-                    UserName = user?.FullName,
+                    CustomName = user?.FullName,
                     Address = bill.BillDeliveryAddress,
                     DeliveryDate = bill.BillDeliveryDate,
                     Deposit = bill.BillDeposit,
@@ -66,13 +66,13 @@ namespace Cakee.Controllers
             {
                 return NotFound("Bill not found");
             }
-            var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
+            var user = await _userService.GetByIdAsync(bill.BillCustomId.ToString());
             var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
-            var acessory = await _acessoryService.GetByIdAsync(bill.BillAccessoryId);
+            var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId);
             var response = new
             {
                 Id = bill.Id.ToString(),
-                UserName = user?.FullName,
+                CustomName = user?.FullName,
                 Address = bill.BillDeliveryAddress,
                 DeliveryDate = bill.BillDeliveryDate,
                 Deposit = bill.BillDeposit,
@@ -108,9 +108,9 @@ namespace Cakee.Controllers
             var billId = existingBill.Id;
             bill.Id = billId;
             await _billService.UpdateAsync(id, bill);
-            var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
+            var user = await _userService.GetByIdAsync(bill.BillCustomId.ToString());
             var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
-            var acessory = await _acessoryService.GetByIdAsync(bill.BillAccessoryId);
+            var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId);
             return Ok
             (
                 new
@@ -120,7 +120,7 @@ namespace Cakee.Controllers
                     bill = new
                     {
                         Id = bill.Id.ToString(),
-                        UserName = user?.FullName,
+                        CustomName = user?.FullName,
                         Address = bill.BillDeliveryAddress,
                         DeliveryDate = bill.BillDeliveryDate,
                         Deposit = bill.BillDeposit,

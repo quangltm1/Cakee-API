@@ -56,7 +56,7 @@ namespace Cakee.Controllers
             {
                 Id = c.Id.ToString(),
                 Name = c.CategoryName,
-                UserId = c.UserId.ToString()
+                UserId = c.UserId
             }));
         }
 
@@ -132,8 +132,8 @@ namespace Cakee.Controllers
                 CakeImage = cake.CakeImage,
                 CakeRating = cake.CakeRating,
                 CakeQuantity = cake.CakeQuantity,
-                CakeCategoryId = cake.CakeCategoryId.ToString(), // ✅ Chuyển ObjectId sang string
-                UserId = cake.UserId.ToString(), // ✅ Chuyển ObjectId sang string
+                CakeCategoryId = cake.CakeCategoryId, // ✅ Chuyển ObjectId sang string
+                UserId = cake.UserId, // ✅ Chuyển ObjectId sang string
             });
 
             return Ok(response);
