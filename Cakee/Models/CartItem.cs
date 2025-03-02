@@ -7,10 +7,13 @@ namespace Cakee.Models
     {
         [BsonRequired]
         [BsonElement("CakeId")]
-        public ObjectId CakeId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public String? CakeId { get; set; }
 
-        [BsonElement("Acessory")]
-        public ObjectId Acessory { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("AccessoryId")]
+        public String? AccessoryId { get; set; }
+
         [BsonRequired]
         [BsonElement("QuantityCake")]
         public int QuantityCake { get; set; }

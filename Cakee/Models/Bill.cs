@@ -35,10 +35,14 @@ namespace Cakee.Models
         [BsonRequired]
         public ObjectId Id { get; set; }
 
-        [BsonRequired]
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("BillAcessoriesId")]
-        public String? BillAcessoriesId { get; set; }
+        [BsonElement("BillCakeSizeId")]
+        public String? BillCakeSizeId { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("BillAccessoryId")]
+        public String? BillAccessoryId { get; set; }
+
 
         [BsonRequired]
         [BsonElement("BillDeliveryAddress")]

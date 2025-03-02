@@ -36,7 +36,7 @@ namespace Cakee.Controllers
             {
                 var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
                 var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
-                var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId.ToString());
+                var acessory = await _acessoryService.GetByIdAsync(bill.BillAccessoryId);
                 response.Add(new
                 {
                     Id = bill.Id.ToString(),
@@ -68,7 +68,7 @@ namespace Cakee.Controllers
             }
             var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
             var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
-            var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId.ToString());
+            var acessory = await _acessoryService.GetByIdAsync(bill.BillAccessoryId);
             var response = new
             {
                 Id = bill.Id.ToString(),
@@ -110,7 +110,7 @@ namespace Cakee.Controllers
             await _billService.UpdateAsync(id, bill);
             var user = await _userService.GetByIdAsync(bill.BillUserId.ToString());
             var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
-            var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId.ToString());
+            var acessory = await _acessoryService.GetByIdAsync(bill.BillAccessoryId);
             return Ok
             (
                 new

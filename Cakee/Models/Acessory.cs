@@ -14,5 +14,9 @@ namespace Cakee.Models
         [BsonRequired]
         [BsonElement("AcessoryPrice")]
         public decimal AcessoryPrice { get; set; }
+        [BsonElement("UserId")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public String? UserId { get; set; }
+
     }
 }

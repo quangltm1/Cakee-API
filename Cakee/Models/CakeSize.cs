@@ -13,5 +13,10 @@ namespace Cakee.Models
         [BsonElement("SizeName")]
         public string? SizeName { get; set; }
 
+        [BsonElement("UserId")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public String? UserId { get; set; }
+
+
     }
 }
