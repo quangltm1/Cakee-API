@@ -10,5 +10,7 @@ namespace Cakee.Services.IService
         Task UpdateAsync(string id, Acessory acessory);
         Task DeleteAsync(string id);
         Task<Acessory> GetByNameAsync(string acessoryName);
+
+        Task<List<Acessory>> GetAcessoryByUserIdAsync(string storeId);
     }
 }

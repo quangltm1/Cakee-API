@@ -1,6 +1,7 @@
 ﻿using Cakee.Models;
 using Cakee.Services.IService;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Cakee.Services.Service
@@ -46,6 +47,12 @@ namespace Cakee.Services.Service
         public async Task<Acessory> GetByNameAsync(string? acessoryName)
         {
             return await _acessoryCollection.Find(acessory => acessory.AcessoryName == acessoryName).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Acessory>> GetAcessoryByUserIdAsync(string storeId)
+        {
+            var objectId = ObjectId.Parse(storeId); // Chuyển đổi storeId từ string sang ObjectId
+            return await _acessoryCollection.Find(c => c.UserId == objectId.ToString()).ToListAsync();
         }
     }
 }

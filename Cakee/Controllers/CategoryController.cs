@@ -167,7 +167,7 @@ namespace Cakee.Controllers
             return Ok(categories.Select(c => new
             {
                 Id = c.Id.ToString(),
-                Name = c.CategoryName,
+                CategoryName = c.CategoryName,
                 UserId = c.UserId
             }));
         }

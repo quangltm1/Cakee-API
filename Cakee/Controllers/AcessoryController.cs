@@ -35,6 +35,7 @@ namespace Cakee.Controllers
                     Id = acessory.Id.ToString(),
                     AcessoryName = acessory.AcessoryName,
                     AcessoryPrice = acessory.AcessoryPrice,
+                    AcessoryShopId = acessory.UserId
                 });
             }
             return Ok(response);
@@ -52,8 +53,9 @@ namespace Cakee.Controllers
             var response = new
             {
                 Id = acessory.Id.ToString(),
-                AcessoryName = acessory.AcessoryPrice,
+                AcessoryName = acessory.AcessoryName,
                 AcessoryPrice = acessory.AcessoryPrice,
+                AcessoryShopId = acessory.UserId
             };
             return Ok(response);
 
@@ -73,9 +75,30 @@ namespace Cakee.Controllers
                 Id = acessory.Id.ToString(),
                 AcessoryName = acessory.AcessoryName,
                 AcessoryPrice = acessory.AcessoryPrice,
+                AcessoryShopId = acessory.UserId
             };
             return Ok(response);
         }
+
+        [HttpGet("GetAcessoryByUserId")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAcessoryByUserId(string userId)
+
+        {
+            var acessories = await _acessoryService.GetAcessoryByUserIdAsync(userId);
+            if (acessories == null || acessories.Count == 0)
+            {
+                return NotFound(new { message = "No categories found." });
+            }
+            return Ok(acessories.Select(c => new
+            {
+                Id = c.Id.ToString(),
+                AcessoryName = c.AcessoryName,
+                AcessoryPrice = c.AcessoryPrice,
+                UserId = c.UserId
+            }));
+        }
+
 
         [HttpPost("Create Acessory")]
         public async Task<ActionResult> CreateAcessory(Acessory acessory)
