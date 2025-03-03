@@ -61,21 +61,55 @@ namespace Cakee.Controllers
             return Ok(response);
         }
 
-        [HttpPost("Create Cake Size")]
-        public async Task<ActionResult> CreateCakeSize(CakeSize cakesize)
+        [HttpGet("GetByUserId")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetByUserId(string id)
         {
-            // Check if the size name exists
+            var cakesizes = await _cakeSizeService.GetByShopIdAsync(id);
+            var response = new List<object>(); // This will hold the formatted response
+            //if cake not null then show, if null then show message not found
+            if (cakesizes == null)
+            {
+                return NotFound("Cake Size not found");
+            }
+            foreach (var cakesize in cakesizes)
+            {
+                response.Add(new
+                {
+                    Id = cakesize.Id.ToString(),
+                    CakeSizeName = cakesize.SizeName,
+                    UserId = cakesize.UserId
+                });
+            }
+            return Ok(response);
+        }
+
+        [HttpPost("Create Cake Size")]
+        public async Task<ActionResult> CreateCakeSize([FromBody] CakeSize cakesize)
+        {
+            Console.WriteLine($"📌 Nhận request tạo Cake Size: {cakesize.SizeName} - UserId: {cakesize.UserId}");
+
+            if (string.IsNullOrWhiteSpace(cakesize.SizeName))
+            {
+                return BadRequest(new { message = "⚠️ Size Name không được để trống." });
+            }
+            if (string.IsNullOrWhiteSpace(cakesize.UserId))
+            {
+                return BadRequest(new { message = "⚠️ UserId không được để trống." });
+            }
+
             var existingCakeSize = await _cakeSizeService.GetByNameAsync(cakesize.SizeName);
             if (existingCakeSize != null)
             {
-                return BadRequest(new { message = "Size already exists, enter another size." });
+                return BadRequest(new { message = "⚠️ Size đã tồn tại, nhập tên khác." });
             }
-            // Create the cake size
+
             var newCakeSize = await _cakeSizeService.CreateAsync(cakesize);
-            // Return a success message
+            Console.WriteLine($"✅ Tạo thành công Cake Size ID: {newCakeSize.Id}");
+
             return CreatedAtAction(nameof(GetCakeSizeById), new { id = newCakeSize.Id.ToString() }, new
             {
-                message = "Cake Size created successfully.",
+                message = "✅ Cake Size created successfully.",
                 cakesize = new
                 {
                     Id = newCakeSize.Id.ToString(),
@@ -84,6 +118,7 @@ namespace Cakee.Controllers
                 }
             });
         }
+
 
 
         [HttpPatch("Update Cake Size")]

@@ -10,6 +10,7 @@ namespace Cakee.Services.IService
         Task UpdateAsync(string id, CakeSize cakeSize);
         Task DeleteAsync(string id);
         Task<CakeSize> GetByNameAsync(string? sizeName); // Updated return type
+        Task<List<CakeSize>> GetByShopIdAsync(string userId);
     }
 
 }
