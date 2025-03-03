@@ -113,18 +113,33 @@ namespace Cakee.Controllers
             return Ok(acessory);
         }
 
-        [HttpPatch("Update Acessory")]
-        public async Task<ActionResult> UpdateAcessory(string id, Acessory acessory)
+        [HttpPatch("UpdateAccessory")]
+        public async Task<ActionResult> UpdateAccessory(string id, string name, decimal price)
         {
-            // Check if the acessory name exists
-            var existingAcessory = await _acessoryService.GetByNameAsync(acessory.AcessoryName);
-            if (existingAcessory != null && existingAcessory.Id != acessory.Id)
+            var existingAcessory = await _acessoryService.GetByIdAsync(id);
+            if (existingAcessory == null)
             {
-                return BadRequest("Acessory name already exists");
+                return NotFound("Accessory not found");
             }
-            await _acessoryService.UpdateAsync(id, acessory);
-            return Ok(acessory);
+
+            // Kiểm tra nếu có tên mới và tên đó đã tồn tại trên phụ kiện khác
+            if (!string.IsNullOrEmpty(name) && existingAcessory.AcessoryName != name)
+            {
+                var checkName = await _acessoryService.GetByNameAsync(name);
+                if (checkName != null)
+                {
+                    return BadRequest("Accessory name already exists");
+                }
+            }
+
+            // Chỉ cập nhật name và price
+            existingAcessory.AcessoryName = name ?? existingAcessory.AcessoryName;
+            existingAcessory.AcessoryPrice = price;
+
+            await _acessoryService.UpdateAsync(id, existingAcessory);
+            return Ok(existingAcessory);
         }
+
 
         [HttpDelete("Delete Acessory")]
         public async Task<ActionResult> DeleteAcessory(string id)
