@@ -57,6 +57,42 @@ namespace Cakee.Controllers
             }
             return Ok(response);
         }
+
+        [HttpGet("GetBillByCustomId")]
+        public async Task<ActionResult> GetBillByCustomId(string id)
+        {
+            var bills = await _billService.GetBillByCustomId(id);
+            var response = new List<object>();
+            if (bills == null)
+            {
+                return NotFound("Bill not found");
+            }
+            foreach (var bill in bills)
+            {
+                var user = await _userService.GetByIdAsync(bill.BillCustomId.ToString());
+                var cake = await _cakeService.GetByIdAsync(bill.BillCakeId.ToString());
+                var acessory = await _acessoryService.GetByIdAsync(bill.BillAcessoriesId);
+                response.Add(new
+                {
+                    Id = bill.Id.ToString(),
+                    CustomName = user?.FullName,
+                    Address = bill.BillDeliveryAddress,
+                    DeliveryDate = bill.BillDeliveryDate,
+                    Deposit = bill.BillDeposit,
+                    Note = bill.BillNote,
+                    ReceiveDate = bill.BillReceiveDate,
+                    Status = bill.BillStatus,
+                    Total = bill.BillTotal,
+                    CakeContent = bill.BillCakeContent,
+                    CakeName = cake?.CakeName,
+                    CakeSize = cake?.CakeSize,
+                    Acessory = acessory?.AcessoryName,
+                    Quantity = bill.BillCakeQuantity,
+                });
+            }
+            return Ok(response);
+        }
+
         [HttpGet("Get Bill By Id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetBillById(string id)

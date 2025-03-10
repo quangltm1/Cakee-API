@@ -18,6 +18,8 @@ namespace Cakee.Services.Service
             _cakeCollection = database.GetCollection<Cake>(dbSettings.Value.CakesCollectionName);
         }
 
+        public async Task<List<Bill>> GetBillByCustomId(string customId) => await _billcollection.Find(bill => bill.BillCustomId == customId).ToListAsync();
+
         public async Task<Bill> CreateAsync(Bill bill)
         {
             await _billcollection.InsertOneAsync(bill);

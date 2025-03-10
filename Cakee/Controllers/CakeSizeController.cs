@@ -119,8 +119,6 @@ namespace Cakee.Controllers
             });
         }
 
-
-
         [HttpPatch("Update Cake Size")]
         public async Task<ActionResult> UpdateCakeSize(string id, [FromBody] CakeSize request)
         {

@@ -256,6 +256,7 @@ namespace Cakee.Controllers
         }
 
         [HttpGet("Get All Account")]
+        [Authorize]
         public async Task<ActionResult> GetUser()
         {
             var users = await _userService.GetAllAsync();

@@ -3,6 +3,8 @@ using Cakee.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace Cakee.Controllers
 {
@@ -18,6 +20,16 @@ namespace Cakee.Controllers
         {
             _cakeService = cakeService;
             _cate = cate;
+        }
+
+        [HttpGet("text-search")]
+        [AllowAnonymous]
+        public async Task<IActionResult> TextSearch([FromQuery] string query)
+        {
+            var filter = Builders<Cake>.Filter.Text(query); // Use Cake instead of Product
+            var products = await _cakeService.GetAllAsync(); // Fetch all cakes
+            var filteredProducts = products.Where(c => c.CakeName.Contains(query, StringComparison.OrdinalIgnoreCase) || c.CakeDescription.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+            return Ok(filteredProducts);
         }
 
         // GET: api/<CakeController>
