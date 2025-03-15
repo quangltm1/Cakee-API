@@ -17,6 +17,8 @@ namespace Cakee.Services.IService
         Task<Category> GetCategoryByCakeIdAsync(string cakeId);
         Task<Cake> GetBySizeAsync(string sizeName);
         Task<List<Cake>> GetCakesByUserIdAsync(string userId);
+        Task<List<Cake>> GetCakesByCategoryIdAsync(string categoryId);
+
     }
 }
 

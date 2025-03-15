@@ -99,6 +99,11 @@ namespace Cakee.Services.Service
             return await _cakeCollection.Find(c => c.UserId == objectId.ToString()).ToListAsync();
         }
 
+        public async Task<List<Cake>> GetCakesByCategoryIdAsync(string categoryId)
+        {
+            return await _cakeCollection.Find(c => c.CakeCategoryId == categoryId).ToListAsync();
+        }
+
 
 
     }

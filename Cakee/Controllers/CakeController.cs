@@ -32,6 +32,47 @@ namespace Cakee.Controllers
             return Ok(filteredProducts);
         }
 
+        [HttpGet("GetCakesByCategory")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetCakesByCategory([FromQuery] string? categoryId)
+        {
+            if (string.IsNullOrEmpty(categoryId))
+            {
+                return BadRequest(new { message = "Thiếu ID danh mục." });
+            }
+
+            try
+            {
+                var cakes = await _cakeService.GetCakesByCategoryIdAsync(categoryId);
+                if (cakes == null || cakes.Count == 0)
+                {
+                    return NotFound(new { message = "Không có bánh nào trong danh mục này." });
+                }
+
+                return Ok(cakes.Select(c => new
+                {
+                    Id = c.Id.ToString(),
+                    c.CakeName,
+                    c.CakeSize,
+                    c.CakeDescription,
+                    c.CakePrice,
+                    c.CakeImage,
+                    c.CakeRating,
+                    c.CakeQuantity,
+                    CakeCategoryId = c.CakeCategoryId,
+                    UserId = c.UserId
+                }));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Lỗi server.", error = ex.Message });
+            }
+        }
+
+
+
+
+
         // GET: api/<CakeController>
         [HttpGet("Get_All_Cake")]
         [AllowAnonymous]

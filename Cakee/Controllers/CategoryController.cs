@@ -23,26 +23,22 @@ namespace Cakee.Controllers
 
         // GET: api/<CategoryController>
         [HttpGet("Get All Category")]
-        [AllowAnonymous] // Cho phép truy cập không cần xác thực
+        [AllowAnonymous]
         public async Task<ActionResult<List<Category>>> GetCategory()
         {
             var categories = await _categoryService.GetAllAsync();
-            var response = new List<object>(); // This will hold the formatted response
-
-            foreach (var category in categories)
+            var response = categories.Select(category => new
             {
-                response.Add(new
-                {
-                    Id = category.Id.ToString(),  // Convert ObjectId to string
-                    CategoryName = category.CategoryName,
-                    UserId = category.UserId
-                });
-            }
+                categoryId = category.Id.ToString(), // ✅ Đổi "id" thành "categoryId"
+                categoryName = category.CategoryName,
+                userId = category.UserId
+            }).ToList();
 
             return Ok(response);
         }
 
-        
+
+
 
         // GET api/<CategoryController>/5
         [HttpGet("Get Category By Id")]

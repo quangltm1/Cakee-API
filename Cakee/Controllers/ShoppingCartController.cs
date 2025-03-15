@@ -68,9 +68,23 @@ namespace Cakee.Controllers
         [HttpGet("GetCartByUserId/{userId}")]
         public async Task<IActionResult> GetCartByUserId(string userId)
         {
+            Console.WriteLine($"📢 DEBUG: Nhận request với userId = {userId}");
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest("User ID không hợp lệ");
+            }
+
             var cart = await _shoppingCartService.GetCartByUserIdAsync(userId);
+
+            if (cart == null)
+            {
+                return NotFound("Không tìm thấy giỏ hàng cho userId này");
+            }
+
             return Ok(cart);
         }
+
 
         [HttpPost("AddToCartByUserId/{userId}")]
         public async Task<IActionResult> AddToCartByUserId(string userId, [FromBody] CartItem item)
