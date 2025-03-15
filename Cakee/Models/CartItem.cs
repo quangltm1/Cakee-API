@@ -11,7 +11,7 @@ namespace Cakee.Models
         public String? CakeId { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("AccessoryId")]
+        [BsonElement("AcessoryId")]
         public String? AccessoryId { get; set; }
 
         [BsonRequired]

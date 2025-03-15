@@ -9,6 +9,7 @@ namespace Cakee.Services.IService
         Task<Bill> CreateAsync(Bill bill);
         Task UpdateAsync(string id, Bill bill);
         Task DeleteAsync(string id);
+        Task<bool> UpdateOrderStatusAsync(string billId, BillStatus status);
 
         Task<List<Bill>> GetBillByCustomId(string customId);
     }

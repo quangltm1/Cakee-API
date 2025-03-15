@@ -3,12 +3,15 @@ using Cakee.Services.IService;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-    public class ShoppingCartService : IShoppingCartService
-    {
-        private readonly IMongoCollection<Cart> _cartCollection;
+public class ShoppingCartService : IShoppingCartService
+{
+    private readonly IMongoCollection<Cart> _cartCollection;
 
-        public ShoppingCartService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
+    public ShoppingCartService(IOptions<DatabaseSettings> dbSettings, MongoClient mongoClient)
     {
         var database = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
         _cartCollection = database.GetCollection<Cart>(dbSettings.Value.CartsCollectionName);
@@ -16,12 +19,14 @@ using MongoDB.Driver;
 
     public async Task<Cart> GetCartByUserIdAsync(string userId)
     {
-        var objectId = ObjectId.Parse(userId);
-        var cart = await _cartCollection.Find(c => c.UserId == userId).FirstOrDefaultAsync();
+        var filter = Builders<Cart>.Filter.Eq(c => c.UserId, userId);
+        var cart = await _cartCollection.Find(filter).FirstOrDefaultAsync();
+
         if (cart == null)
         {
             cart = new Cart
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 UserId = userId,
                 Items = new List<CartItem>()
             };
@@ -64,7 +69,6 @@ using MongoDB.Driver;
             await _cartCollection.ReplaceOneAsync(c => c.UserId == userId, cart);
             return true;
         }
-
         return false;
     }
 
@@ -94,6 +98,25 @@ using MongoDB.Driver;
         await _cartCollection.ReplaceOneAsync(c => c.UserId == userId, cart);
 
         return cart;
+    }
+
+    public async Task<bool> ProductExistsAsync(string productId)
+    {
+        var filter = Builders<Cart>.Filter.ElemMatch(c => c.Items, i => i.CakeId == productId || i.AccessoryId == productId);
+        var cart = await _cartCollection.Find(filter).FirstOrDefaultAsync();
+        return cart != null;
+    }
+
+
+    public async Task<bool> UpdateCartAsync(string userId, List<CartItem> updatedItems)
+    {
+        var filter = Builders<Cart>.Filter.Eq(c => c.UserId, userId);
+        var update = Builders<Cart>.Update
+            .Set(c => c.Items, updatedItems)
+            .Set(c => c.TotalPrice, updatedItems.Sum(i => i.Total));
+
+        var result = await _cartCollection.UpdateOneAsync(filter, update);
+        return result.ModifiedCount > 0;
     }
 
 }

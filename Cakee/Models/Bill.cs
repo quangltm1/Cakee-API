@@ -43,11 +43,18 @@ namespace Cakee.Models
         [BsonElement("BillAcessoriesId")]
         public String? BillAcessoriesId { get; set; }
 
+        [BsonRequired]
+        [BsonElement("BillDeliveryCustomName")]
+        public string? BillDeliveryCustomName { get; set; }
+
 
         [BsonRequired]
         [BsonElement("BillDeliveryAddress")]
         public string? BillDeliveryAddress { get; set; }
 
+        [BsonRequired]
+        [BsonElement("BillDeliveryPhone")]
+        public string? BillDeliveryPhone { get; set; }
 
         [BsonRequired]
         [BsonElement("BillDeliveryDate")]

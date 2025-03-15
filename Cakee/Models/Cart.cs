@@ -6,18 +6,14 @@ namespace Cakee.Models
     public class Cart
     {
         [BsonId]
-        [BsonRequired]
-        public string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)] // Chuyển đổi ObjectId thành string
+        public string? Id { get; set; }
 
-        [BsonRequired]
-        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("UserId")]
-        public String? UserId { get; set; }
-
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? UserId { get; set; }
         public List<CartItem> Items { get; set; } = new();
-
-        [BsonRequired]
-        [BsonElement("TotalPrice")]
         public decimal TotalPrice { get; set; }
     }
+
 }

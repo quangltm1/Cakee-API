@@ -9,5 +9,8 @@ namespace Cakee.Services.IService
         Task<bool> RemoveFromCartAsync(string userId, string productId);
         Task<bool> ClearCartAsync(string userId);
         Task<Cart> UpdateCartItemAsync(string userId, CartItem item);
+        Task<bool> ProductExistsAsync(string productId);
+        Task<bool> UpdateCartAsync(string userId, List<CartItem> updatedItems);
+
     }
 }
