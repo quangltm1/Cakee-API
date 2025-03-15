@@ -1,5 +1,6 @@
 ﻿using Cakee.Models;
 using Cakee.Services.IService;
+using Cakee.Services.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -12,10 +13,14 @@ namespace Cakee.Controllers
     public class ShoppingCartController : ControllerBase
     {
         private readonly IShoppingCartService _shoppingCartService;
+        private readonly ICakeService _cakeService;
+        private readonly IAcessoryService _acessoryService;
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService)
+        public ShoppingCartController(IShoppingCartService shoppingCartService, ICakeService cakeService, IAcessoryService acessoryService)
         {
             _shoppingCartService = shoppingCartService;
+            _cakeService = cakeService;
+            _acessoryService = acessoryService;
         }
 
         [HttpGet("GetCart")]
@@ -32,13 +37,29 @@ namespace Cakee.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // ✅ Kiểm tra sản phẩm tồn tại trước khi thêm
-            var productExists = await _shoppingCartService.ProductExistsAsync(item.CakeId ?? item.AccessoryId);
-            if (!productExists)
+            var cake = await _cakeService.GetByIdAsync(item.CakeId ?? "");
+            var accessory = await _acessoryService.GetByIdAsync(item.AcessoryId ?? "");
+
+            if (cake == null && accessory == null)
                 return BadRequest("Sản phẩm không tồn tại!");
 
+            // ✅ Tính giá của sản phẩm (nếu có)
+            decimal cakePrice = cake != null ? cake.CakePrice : 0;
+            decimal accessoryPrice = accessory != null ? accessory.AcessoryPrice : 0;
+
+            // ✅ Cập nhật tổng tiền của sản phẩm
+            item.Total = (cakePrice * item.QuantityCake) + (accessoryPrice * item.QuantityAccessory);
+
+            // ✅ Thêm vào giỏ hàng
             var cart = await _shoppingCartService.AddToCartAsync(userId, item);
+
+            // ✅ Cập nhật tổng tiền của giỏ hàng
+            cart.TotalPrice = cart.Items.Sum(i => i.Total);
+            await _shoppingCartService.UpdateCartAsync(userId, cart.Items);
+
             return Ok(cart);
         }
+
 
         [HttpDelete("RemoveFromCart/{productId}")]
         public async Task<IActionResult> RemoveFromCart(string productId)
@@ -91,8 +112,39 @@ namespace Cakee.Controllers
             if (cart == null)
                 return NotFound("Không tìm thấy giỏ hàng cho userId này");
 
-            return Ok(cart);
+            // Lấy danh sách bánh và phụ kiện từ Database
+            var cakesTask = _cakeService.GetAllAsync();
+            var accessoriesTask = _acessoryService.GetAllAsync();
+            await Task.WhenAll(cakesTask, accessoriesTask);
+
+            var cakes = cakesTask.Result;
+            var accessories = accessoriesTask.Result;
+
+            // Cập nhật thông tin giỏ hàng
+            var updatedItems = cart.Items.Select(item => new
+            {
+                item.CakeId,
+                CakeName = cakes.FirstOrDefault(c => c.Id.ToString() == item.CakeId)?.CakeName ?? "Không xác định",
+                item.AcessoryId,
+                AccessoryName = accessories.FirstOrDefault(a => a.Id.ToString() == item.AcessoryId)?.AcessoryName ?? "Không xác định",
+                item.QuantityCake,
+                item.QuantityAccessory,
+                item.Total
+            }).ToList();
+
+            var updatedCart = new
+            {
+                cart.Id,
+                cart.UserId,
+                Items = updatedItems,
+                cart.TotalPrice
+            };
+
+            return Ok(updatedCart);
         }
+
+
+
 
         [HttpPost("AddToCartByUserId/{userId}")]
         public async Task<IActionResult> AddToCartByUserId(string userId, [FromBody] CartItem item)

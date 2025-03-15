@@ -12,7 +12,7 @@ namespace Cakee.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("AcessoryId")]
-        public String? AccessoryId { get; set; }
+        public String? AcessoryId { get; set; }
 
         [BsonRequired]
         [BsonElement("QuantityCake")]

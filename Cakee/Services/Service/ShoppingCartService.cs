@@ -38,7 +38,7 @@ public class ShoppingCartService : IShoppingCartService
     public async Task<Cart> AddToCartAsync(string userId, CartItem item)
     {
         var cart = await GetCartByUserIdAsync(userId);
-        var existingItem = cart.Items.FirstOrDefault(i => i.CakeId == item.CakeId && i.AccessoryId == item.AccessoryId);
+        var existingItem = cart.Items.FirstOrDefault(i => i.CakeId == item.CakeId && i.AcessoryId == item.AcessoryId);
 
         if (existingItem != null)
         {
@@ -51,16 +51,18 @@ public class ShoppingCartService : IShoppingCartService
             cart.Items.Add(item);
         }
 
+        // ✅ Cập nhật tổng tiền giỏ hàng
         cart.TotalPrice = cart.Items.Sum(i => i.Total);
-        await _cartCollection.ReplaceOneAsync(c => c.UserId == userId, cart);
 
+        await _cartCollection.ReplaceOneAsync(c => c.UserId == userId, cart);
         return cart;
     }
+
 
     public async Task<bool> RemoveFromCartAsync(string userId, string productId)
     {
         var cart = await GetCartByUserIdAsync(userId);
-        var itemToRemove = cart.Items.FirstOrDefault(i => i.CakeId == productId || i.AccessoryId == productId);
+        var itemToRemove = cart.Items.FirstOrDefault(i => i.CakeId == productId || i.AcessoryId == productId);
 
         if (itemToRemove != null)
         {
@@ -81,7 +83,7 @@ public class ShoppingCartService : IShoppingCartService
     public async Task<Cart> UpdateCartItemAsync(string userId, CartItem item)
     {
         var cart = await GetCartByUserIdAsync(userId);
-        var existingItem = cart.Items.FirstOrDefault(i => i.CakeId == item.CakeId && i.AccessoryId == item.AccessoryId);
+        var existingItem = cart.Items.FirstOrDefault(i => i.CakeId == item.CakeId && i.AcessoryId == item.AcessoryId);
 
         if (existingItem != null)
         {
@@ -102,7 +104,7 @@ public class ShoppingCartService : IShoppingCartService
 
     public async Task<bool> ProductExistsAsync(string productId)
     {
-        var filter = Builders<Cart>.Filter.ElemMatch(c => c.Items, i => i.CakeId == productId || i.AccessoryId == productId);
+        var filter = Builders<Cart>.Filter.ElemMatch(c => c.Items, i => i.CakeId == productId || i.AcessoryId == productId);
         var cart = await _cartCollection.Find(filter).FirstOrDefaultAsync();
         return cart != null;
     }
