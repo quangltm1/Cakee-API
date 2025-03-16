@@ -120,7 +120,7 @@ namespace Cakee.Controllers
             bill.Id = ObjectId.GenerateNewId();
             bill.BillStatus = BillStatus.Pending; // Đơn mới luôn ở trạng thái "Chờ xử lý"
             bill.BillDeposit = 0; // Không đặt cọc trước
-            bill.BillReceiveDate = DateTime.Now; // Giao hàng sau 3 ngày
+            bill.BillReceiveDate = DateTime.Now;
             bill.BillDeliveryDate = DateTime.Now.AddDays(3);
 
             // ✅ Tự động lấy `BillShopId` từ `BillCakeId`
@@ -136,7 +136,7 @@ namespace Cakee.Controllers
             return Ok(new { message = "Đơn hàng cho khách vãng lai đã được tạo thành công!", billId = bill.Id.ToString(), shopId = bill.BillShopId });
         }
 
-
+       
 
         /// ✅ **Cập nhật trạng thái đơn hàng**
         [HttpPut("UpdateBillStatus/{billId}")]
