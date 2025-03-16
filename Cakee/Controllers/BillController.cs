@@ -120,7 +120,8 @@ namespace Cakee.Controllers
             bill.Id = ObjectId.GenerateNewId();
             bill.BillStatus = BillStatus.Pending; // Đơn mới luôn ở trạng thái "Chờ xử lý"
             bill.BillDeposit = 0; // Không đặt cọc trước
-            bill.BillReceiveDate = DateTime.Now.AddDays(3); // Giao hàng sau 3 ngày
+            bill.BillReceiveDate = DateTime.Now; // Giao hàng sau 3 ngày
+            bill.BillDeliveryDate = DateTime.Now.AddDays(3);
 
             // ✅ Tự động lấy `BillShopId` từ `BillCakeId`
             var cake = await _cakeService.GetByIdAsync(bill.BillCakeId);
