@@ -2,6 +2,7 @@
 using Cakee.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using System.Security.Claims;
 
@@ -201,5 +202,26 @@ namespace Cakee.Controllers
             await _billService.DeleteAsync(id);
             return Ok("Xóa đơn hàng thành công!");
         }
+
+        [HttpGet("GetCakeSoldByCake/{cakeId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetCakeSoldByCake(string cakeId)
+        {
+            try
+            {
+                var totalSold = await _billService.GetAllAsync();
+
+                var soldQuantity = totalSold
+                    .Where(b => b.BillCakeId == cakeId && b.BillStatus == BillStatus.Done) // Chỉ tính đơn đã hoàn thành
+                    .Sum(b => b.BillCakeQuantity);
+
+                return Ok(new { cakeId, totalSold = soldQuantity });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Lỗi lấy số lượng bánh đã bán", error = ex.Message });
+            }
+        }
     }
+
 }
