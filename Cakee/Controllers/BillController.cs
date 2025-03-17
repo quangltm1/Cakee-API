@@ -120,8 +120,8 @@ namespace Cakee.Controllers
             bill.Id = ObjectId.GenerateNewId();
             bill.BillStatus = BillStatus.Pending; // Đơn mới luôn ở trạng thái "Chờ xử lý"
             bill.BillDeposit = 0; // Không đặt cọc trước
-            bill.BillReceiveDate = DateTime.Now;
-            bill.BillDeliveryDate = DateTime.Now.AddDays(3);
+            bill.BillReceiveDate = GetVietnamTime(); // Lấy thời gian hiện tại theo giờ Việt Nam
+            bill.BillDeliveryDate = GetVietnamTime().AddDays(3);
 
             // ✅ Tự động lấy `BillShopId` từ `BillCakeId`
             var cake = await _cakeService.GetByIdAsync(bill.BillCakeId);
@@ -136,7 +136,15 @@ namespace Cakee.Controllers
             return Ok(new { message = "Đơn hàng cho khách vãng lai đã được tạo thành công!", billId = bill.Id.ToString(), shopId = bill.BillShopId });
         }
 
-       
+        private DateTime GetVietnamTime()
+        {
+            TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            DateTime vietnamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
+            return vietnamTime.AddHours(7);
+        }
+
+
+
 
         /// ✅ **Cập nhật trạng thái đơn hàng**
         [HttpPut("UpdateBillStatus/{billId}")]
